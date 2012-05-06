@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nome: MyString
+  nome_responsavel: MyString
+  email_responsavel: MyString
+
+two:
+  nome: MyString
+  nome_responsavel: MyString
+  email_responsavel: MyString

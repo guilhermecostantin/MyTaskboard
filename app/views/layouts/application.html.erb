@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Mytaskboard</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  	<%= stylesheet_link_tag    "application" %>
+  	<%= javascript_include_tag "application" %>
+  	<%= csrf_meta_tags %>
+</head>
+
+<body>
+<div id="topo">
+	<div id="containerTopo">
+		<img src='/assets/logo.png' alt="logo mytaskboard" id="logo" />
+		<a href="#" id="botao" class="botao">Login</a>
+	</div>
+</div>
+
+<div id="corpo">
+	<%= yield %>
+</div>
+<br/>
+<footer>
+	<div id="containerFooter">
+		<span>Copyright 2012 - contato@mytaskboard.com</span>
+		<div id="contIcon">
+			<a href = "#" id="tweetIcon" class="socialIcon"></a>
+			<a href = "#" id="faceIcon" class="socialIcon"></a>
+		</div>
+	</div>
+</footer>
+
+
+
+
+</body>
+</html>

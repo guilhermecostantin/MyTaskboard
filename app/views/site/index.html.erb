@@ -1,0 +1,62 @@
+<div id="banner">
+	<div id="containerBanner">
+		<div id="bannerEsquerda">
+			<h1 id="primeiroTitulo">simple, clean</h1>
+			<h1 id="segundoTitulo">and secure</h1>
+			<ul>
+				<li class="ordenacao">1º</li><li>Create a named project</li><br/>
+				<li class="ordenacao">2º</li><li>List and organize your tasks: to do, in progress and done</li><br/>
+				<li class="ordenacao">3º</li><li>Go waste time with the important thing:the work!</li><br/>
+			</ul>	
+		</div>
+		<div id="bannerDireita">
+			<img src='/assets/imagem_banner.png' id="imagemBanner" />
+		</div>
+		<br />	
+	</div>
+</div>
+<div id="registro">
+	<div id="colunaEsquerda">
+		<img src='/assets/quote_left.gif' id="quoteLeft" /><br />
+		<p id="habilitado">A simple kickass taskboard where you just worry about getting things done.</p>
+		<p id = "desabilitado" style="display: none;">Perfect for Scrum method and keep up with the tasks evolution.</p>
+		<img src='/assets/quote_right.gif' id="quoteRight" /><br/>
+	</div>
+	<div id="colunaDireita">
+		<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  		<%= devise_error_messages! %>
+			
+			<fieldset>
+				<h2> Tryout, it's free!</h2>
+				<%= f.email_field :email, :class=>"input", :placeholder=>"Email" %>
+				<%= f.password_field :password, :class=>"input", :placeholder=>"Senha" %>
+				<%= f.submit "Register", :id=>"botaoRegistro", :class=>"botao" %>
+			</fieldset>
+		
+		<% end %>
+		
+	</div>
+	<br/>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<h2>Sign up</h2>
+
+<script type="text/javascript">
+	function iniciaTimer() {
+		$("#containerDepoimentos").everyTime(6000, function() {
+			trocaDepoimento();
+		});
+	};
+	
+	function trocaDepoimento{
+		$("#habilitado").fadeOut();
+		$("#desabilitado").fadeIn();
+	};
+	
+	$(document).ready(function(){
+		iniciaTimer();
+	});
+</script>

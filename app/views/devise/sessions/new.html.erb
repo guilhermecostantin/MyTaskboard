@@ -1,17 +1,13 @@
-<h2>Sign in</h2>
-
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
-
-  <div><%= f.submit "Sign in" %></div>
-<% end %>
-
-<%= render "links" %>
+<div id="login">
+	<h1><span id="primeiroTitulo">Welcome </span><span id="segundoTitulo">back!</span> </h1>
+	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+		<fieldset>
+			 <%= f.email_field :email, :class=>"input", :placeholder=>"Email" %>
+			 <%= f.password_field :password, :class=>"input", :placeholder=>"Senha" %>
+			 <% if devise_mapping.rememberable? -%>
+			    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+			  <% end -%>			
+			<%= f.submit "Sign in", :id=>"botaoRegistro", :class=>"botao" %>
+		</fieldset>
+	<% end %>
+</div>

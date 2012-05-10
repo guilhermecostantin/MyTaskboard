@@ -1,33 +1,25 @@
-<h1>Listing projetos</h1>
-  <%= link_to('Logout', destroy_usuario_session_path, :method => :delete) %>        
-<table>
-  <tr>
-    <th>Nome</th>
-    <th>Nome responsavel</th>
-    <th>Email responsavel</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div id="projetos" class="container">
+	
+	<div class="topoPagina">
+		<h1>Projects</h1>
+		<p>Ready to begin? It's easy! Just enter a name in the box and create a new project!</p>
+		<div id="contForm">
+			<%= render 'form' %>	
+		</div>
+		<br/>
+	</div>
+	<div class="conteudoPagina">
+		<% @projetos.each do |projeto| %>
+		<div class="folder">
+			<%= link_to 'x', projeto, confirm: 'Are you sure? all the tasks will be deleted, there is no way back!', method: :delete %>	
+			<span><%= projeto.nome %></span>
+		</div>
+		<% end %>
+	</div>
+</div>
 
-<% @projetos.each do |projeto| %>
-  <tr>
-    <td><%= projeto.nome %></td>
-    <td><%= projeto.nome_responsavel %></td>
-    <td><%= projeto.email_responsavel %></td>
-    <td><%= link_to 'Show', projeto %></td>
-    <td><%= link_to 'Edit', edit_projeto_path(projeto) %></td>
-    <td><%= link_to 'Destroy', projeto, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
 
-<br />
 
-<%=@usuario_logado%>
 
-<br/>
-<%=@usuario.inspect%>
-<br />
 
-<%= link_to 'New Projeto', new_projeto_path %>
+

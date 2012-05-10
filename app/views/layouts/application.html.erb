@@ -13,8 +13,12 @@
 <body>
 <div id="topo">
 	<div id="containerTopo">
-		<img src='/assets/logo.png' alt="logo mytaskboard" id="logo" />
-		<a href="#" id="botao" class="botao">Login</a>
+		<a href="/site"><img src='/assets/logo.png' alt="logo mytaskboard" id="logo" /></a>
+		<% if usuario_signed_in? %>
+  		  <%= link_to'Logout', destroy_usuario_session_path, :method => :delete, :id => "botao", :class => "botao" %>        
+		<% else %>
+  		<%= link_to "Login", new_session_path(resource_name),:id => "botao", :class => "botao" %><br />
+		<% end %>
 	</div>
 </div>
 
@@ -22,6 +26,8 @@
 	<%= yield %>
 </div>
 <br/>
+
+
 <footer>
 	<div id="containerFooter">
 		<span>Copyright 2012 - contato@mytaskboard.com</span>

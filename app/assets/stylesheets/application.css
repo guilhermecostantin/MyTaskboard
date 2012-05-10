@@ -33,7 +33,7 @@ br{
 	height:60px;
 	background-color:#7d7d7d;
 }
-#containerTopo, #containerFooter, #containerBanner, #registro{
+#containerTopo, #containerFooter, #containerBanner, #registro, #login, .container{
 	width:980px;
 	margin: 0 auto;
 }
@@ -180,7 +180,7 @@ footer span a{
 #colunaDireita h2{
 	margin:25px 0 12px;
 }
-#colunaDireita form .input{
+#colunaDireita form .input, #login form .input{
 	float:left;
 	height:50px;
 	border:1px solid #d3d3d3;
@@ -191,4 +191,87 @@ footer span a{
 }
 #botaoRegistro{
 	border: 1px solid #999;
+}
+
+/*----------------------*/
+/*------- LOGIN --------*/
+/*----------------------*/
+
+ #login form{
+ 	float:left;
+ 	width:400px;
+ 	margin:25px 0 50px;
+ }
+ #login h1{
+	font-size:40px;
+	font-weight:normal;
+ 	margin-top:25px;
+ }
+#login h1 span{
+	font-size:1em;
+}
+
+/*-------------------------*/
+/*------- PROJETOS --------*/
+/*-------------------------*/
+.topoPagina{
+	padding-bottom:25px;
+	margin-bottom:30px;
+	border-bottom:1px solid #e1e1e1;
+}
+.conteudoPagina{
+	padding-top:25px;
+	margin-bottom:300px;
+}
+#projetos h1{
+	font-size:32px;
+	color:#666;
+	font-weight:normal;
+	margin-top:25px;
+}
+#projetos p{
+	font-size:16px;
+	color:#444;
+	margin-top:25px;
+	float:left;
+}
+#contForm{
+	float:right;
+	width:300px;
+}
+.inputProject{
+	float:left;
+	margin-top:15px;
+	height:30px;
+	border:1px solid #d3d3d3;
+	width:200px;
+	margin-bottom:17px;
+	font-size: 1em;
+	padding-left: 10px;
+}
+.folder{
+	float:left;
+	width:272px;
+	height:207px;
+	background-image: url("/assets/folder.png");
+	margin-right:20px;
+	position:relative;
+}
+.folder span{
+	display:block;
+	margin:60px auto 0;
+	width:90%;
+	text-align:center;
+	height:130px;
+	
+	font-size:1em;
+	color:#444;
+}
+.folder a{
+	position:absolute;
+	right:15px;
+	top:45px;
+	color:#666;
+	text-decoration:none;
+	font-weight:bold;
 }

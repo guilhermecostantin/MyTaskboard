@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>nome do projeto:</b>
+  <%= @projeto.nome%>
+</p>
+
+<% if @tarefas%>
+	<%@tarefas.each do |tarefa|%>
+		<%=tarefa.status%><br />
+		<%=tarefa.descricao%>
+	<%end%>
+<%end%>
+
+<%= link_to 'Nova Tarefa', new_projeto_tarefa_path(@projeto) %>
+
+<br/>
+<%= link_to 'Back', usuario_path(@usuario) %>

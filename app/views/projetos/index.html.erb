@@ -1,5 +1,4 @@
 <div id="projetos" class="container">
-	
 	<div class="topoPagina">
 		<h1>Projects</h1>
 		<p>Ready to begin? It's easy! Just enter a name in the box and create a new project!</p>
@@ -13,9 +12,11 @@
 		<div class="folder">
 			<%= link_to 'x', projeto, confirm: 'Are you sure? all the tasks will be deleted, there is no way back!', method: :delete %>	
 			<span><%= projeto.nome %></span>
+			<%= link_to "projeto", projeto%>
 		</div>
 		<% end %>
 	</div>
+	<br/>
 </div>
 
 

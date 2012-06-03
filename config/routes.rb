@@ -6,8 +6,11 @@ Mytaskboard::Application.routes.draw do
   end
               
   resources :usuarios
+ 
   
-  resources :projetos
+  resources :projetos do
+    resources :tarefas  
+  end
 
   root :to => "site#index"
   match "site" => "site#index"

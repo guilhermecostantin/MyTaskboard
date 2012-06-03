@@ -214,6 +214,9 @@ footer span a{
 /*-------------------------*/
 /*------- PROJETOS --------*/
 /*-------------------------*/
+#projetos{
+	margin-bottom:200px;
+}
 .topoPagina{
 	padding-bottom:25px;
 	margin-bottom:30px;
@@ -250,22 +253,22 @@ footer span a{
 	padding-left: 10px;
 }
 .folder{
+	display:block;
 	float:left;
 	width:272px;
 	height:207px;
 	background-image: url("/assets/folder.png");
-	margin-right:20px;
+	margin:0 20px 50px 0;
 	position:relative;
 }
 .folder span{
 	display:block;
-	margin:60px auto 0;
+	margin:80px auto 0;
 	width:90%;
 	text-align:center;
 	height:130px;
-	
-	font-size:1em;
-	color:#444;
+	font-size:16px;
+	color:#333;
 }
 .folder a{
 	position:absolute;

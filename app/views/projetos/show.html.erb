@@ -11,8 +11,21 @@
 		<%=tarefa.descricao%>
 	<%end%>
 <%end%>
+<br />
+<%= form_tag ('/projetos/'+@projeto.id+'/tarefas') do%>
 
-<%= link_to 'Nova Tarefa', new_projeto_tarefa_path(@projeto) %>
+  
+    <%= label_tag :descricao %><br />
+    <%= text_field_tag :descricao %>
+    <%= submit_tag %>
+
+  
+<% end %>
+
 
 <br/>
 <%= link_to 'Back', usuario_path(@usuario) %>
+<script type="text/javascript">
+	
+	
+</script>

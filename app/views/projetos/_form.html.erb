@@ -12,6 +12,7 @@
   <% end %>
 	<fieldset>
 		<%= f.text_field :nome, :class=>"inputProject", :placeholder=>"Project name" %>
+		<%= f.hidden_field :usuario_id, :value => @usuario.id%>
     	<%= f.submit "Create", :id=>"botaoRegistro", :class=>"botao" %>	
 	</fieldset>
     

@@ -19,9 +19,9 @@ class ProjetosController < ApplicationController
   def create
     
     @projeto = Projeto.new(params[:projeto])
-    @usuario.projetos << @projeto
+    
     respond_to do |format|
-      if @usuario.save
+      if @projeto.save
         #trocar esses redirects aqui
         format.html { redirect_to @projeto, notice: 'Projeto was successfully created.' }
         format.json { render json: @projeto, status: :created, location: @projeto }
@@ -35,9 +35,11 @@ class ProjetosController < ApplicationController
   def show
     
     @projeto = @usuario.projetos.find(params[:id])
+    @tarefas = @projeto.tarefas
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @projeto}
+      format.json { render json: @nova_tarefa}
     end
   end
 

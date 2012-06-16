@@ -51,16 +51,16 @@ class TarefasController < ApplicationController
   def create
     
     @projeto = @usuario.projetos.find(params[:projeto_id])    
-    @tarefa = Tarefa.new(params[:tarefa])
-    @projeto << @tarefa
-
+    @tarefa = Tarefa.new(:descricao => params[:descricao], :status => 1)
+    @projeto.tarefas << @tarefa
+    @usuario.projetos << @projeto
     respond_to do |format|
       if @usuario.save
-        format.html { redirect_to @tarefa, notice: 'Tarefa was successfully created.' }
-        format.json { render json: @tarefa, status: :created, location: @tarefa }
+        format.html { redirect_to @projeto, notice: 'Tarefa was successfully created.' }
+        format.json { render json: @projeto, status: :created, location: @projeto}
       else
         format.html { render action: "new" }
-        format.json { render json: @tarefa.errors, status: :unprocessable_entity }
+        format.json { render json: @usuario.errors, status: :unprocessable_entity }
       end
     end
   end

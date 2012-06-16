@@ -3,7 +3,7 @@ class Tarefa
 
 
   key :descricao, String
-  key :status, Int
+  key :status, Integer
 
   belongs_to :projetos
 

@@ -9,6 +9,9 @@ Mytaskboard::Application.routes.draw do
  
   
   resources :projetos do
+    member  do
+      post "adduser"
+    end
     resources :tarefas  
   end
 

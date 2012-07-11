@@ -7,13 +7,14 @@ class ProjetosController < ApplicationController
   def index
     @novo_projeto = Projeto.new    
     @projetos = @usuario.projetos
+    if !@usuario.permissoes_projetos.empty?
+      @permitidos = Array.new
+      @usuario.permissoes_projetos.each do |pp|
+        @permitidos << Projeto.find(pp)
+      end
+    end
     @usuario_logado = usuario_signed_in?
     
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @projetos}
-      format.json { render json: @novo_projeto}
-    end
   end
 
   def create
@@ -27,19 +28,21 @@ class ProjetosController < ApplicationController
         format.json { render json: @projeto, status: :created, location: @projeto }
       else
         format.html { render action: "new" }
-        format.json { render json: @usuario.errors, status: :unprocessable_entity }
+        format.json { render json: @projeto.errors, status: :unprocessable_entity }
       end
     end
   end
   
   def show
-    
+    @users = Usuario.all
     @projeto = @usuario.projetos.find(params[:id])
     @tarefas = @projeto.tarefas
+    @afazer = @tarefas.select{|x| x.status==1}
+    @andamento = @tarefas.select{|x| x.status==2}
+    @prontas = @tarefas.select{|x| x.status==3}
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @projeto}
-      format.json { render json: @nova_tarefa}
+      format.html 
+      format.json { render json: @users}
     end
   end
 
@@ -51,6 +54,18 @@ class ProjetosController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projetos_url }
       format.json { head :ok }
+    end
+  end
+  
+  def adduser
+    ids = params[:users_id].split(",")
+    ids.each do |id|
+      u = Usuario.find(id)
+      u.permissoes_projetos << params[:id]
+      u.save
+    end
+    respond_to do |format|
+      format.html { redirect_to projetos_url }
     end
   end
  

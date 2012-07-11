@@ -1,31 +1,106 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>nome do projeto:</b>
-  <%= @projeto.nome%>
-</p>
-
-<% if @tarefas%>
-	<%@tarefas.each do |tarefa|%>
-		<%=tarefa.status%><br />
-		<%=tarefa.descricao%>
-	<%end%>
-<%end%>
-<br />
-<%= form_tag ('/projetos/'+@projeto.id+'/tarefas') do%>
-
-  
-    <%= label_tag :descricao %><br />
-    <%= text_field_tag :descricao %>
-    <%= submit_tag %>
-
-  
-<% end %>
+<div id="tarefas">
+	<div class="topoPagina">
+		<h1><%= @projeto.nome%></h1>
+		<br/>
+		<%= form_tag ('/projetos/'+@projeto.id+'/adduser') do%>
+		    <%= label_tag :users_id %><br />
+		    <%= text_field_tag :users_id %>
+		    <%= submit_tag %>
+		<% end %>		
 
 
-<br/>
-<%= link_to 'Back', usuario_path(@usuario) %>
-<script type="text/javascript">
+input type="text" id="demo-input-local" name="blah" />
+        <input type="button" value="Submit" />
+        <script type="text/javascript">
+
+       
+       
+        $(document).ready(function() {
+            $("#users_id").tokenInput('/usuarios.json',{
+            	crossDomain:false,
+            	propertyToSearch: "email",
+            	theme:"facebook",
+        	 	hintText: "digite o email que deseja buscar",
+                noResultsText: "Nenhum usuário encontrado",
+                searchingText: "Procurando..."
+            });
+        });
+        </script>
+	</div>
+	<div class="conteudoPagina">
+		
+		<div id="coluna1" class="colunas">
+			<h2>Tarefas</h2>
+			<br/>
+			<% if @afazer%>
+			<ul>
+				<%@afazer.each do |tarefa|%>
+					<li class="postit" draggable=true>
+						<p><%=tarefa.descricao%></p> 
+					</li>
+				<%end%>
+			</ul>
+			<%else%>
+			<p>Nenhuma tarefa a ser executada!</p>
+			<%end%>
+		</div>
+		<div id="coluna2" class="colunas">
+			<h2>Em andamento</h2>
+				<br/>
+			<% if @andamento%>
+			<ul>
+				<%@andamento.each do |tarefa|%>
+					<li>
+						<span>Descricao: <%=tarefa.descricao%>, Status: <%=tarefa.status%></span> 
+					</li>
+				<%end%>
+			</ul>
+			<%else%>
+			<p>Nenhuma tarefa a ser executada!</p>
+			<%end%>
+
+		</div>
+		<div id="coluna3" class="colunas">
+			<h2>Finalizadas</h2>
+				<br/>
+			<% if @prontas%>
+			<ul>
+				<%@prontas.each do |tarefa|%>
+					<li>
+						<span>Descricao: <%=tarefa.descricao%>, Status: <%=tarefa.status%></span> 
+					</li>
+				<%end%>
+			</ul>
+			<%else%>
+			<p>Nenhuma tarefa a ser executada!</p>
+			<%end%>
+
+		</div>
+		
+		
+		<br/><br/><br/><br/>
+		
+		<br />
+		<%= form_tag ('/projetos/'+@projeto.id+'/tarefas') do%>
+		    <%= label_tag :descricao %><br />
+		    <%= text_field_tag :descricao %>
+		    <%= submit_tag %>
+		<% end %>
+	</div>
 	
+</div>
+
+
+
+
+
+
+
+
+
+<%= link_to 'Back', projetos_path%>
+<script type="text/javascript">
+
 	
 </script>

@@ -4,7 +4,7 @@ class Usuario
   
   key :nome, String
   key :email, String
-  key :projetos, Array
+  key :permissoes_projetos, Array
   key :encrypted_password, String
   key :current_sign_in_at, Time
   

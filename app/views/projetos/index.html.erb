@@ -15,6 +15,16 @@
 			<%= link_to "projeto", projeto%>
 		</div>
 		<% end %>
+		
+		<% if @permitidos%>
+			<% @permitidos.each do |projeto| %>
+			<div class="folder">
+				<%= link_to 'x', projeto, confirm: 'Are you sure? all the tasks will be deleted, there is no way back!', method: :delete %>	
+				<span><%= projeto.nome %></span>
+				<%= link_to "projeto", projeto%>
+			</div>
+			<% end %>
+		<%end%>
 	</div>
 	<br/>
 </div>

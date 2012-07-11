@@ -41,6 +41,10 @@ br{
 	margin-top:17px;
 	float:left;
 }
+#corpo{
+	width:980px;
+	margin:0 auto;
+}
 .botao{
 	font-family:Calibri !important;
 	float:right;
@@ -277,4 +281,36 @@ footer span a{
 	color:#666;
 	text-decoration:none;
 	font-weight:bold;
+}
+/*------------------------*/
+/*------- TAREFAS --------*/
+/*------------------------*/
+#tarefas h2{
+	width:100%;
+	text-align:center;
+	color:#333;
+	font-size: 22px;
+}
+.colunas{
+	width:325px;
+	float:left;
+	height: 500px;
+}
+#coluna1,#coluna2{
+	border-right:1px solid #c0c0c0;
+}
+.postit{
+	width:87px;
+	height:93px;
+	padding:5px;
+	background-image: url("/assets/postit.png");
+	float:left;
+	margin-right:7px;
+	list-style:none;
+	cursor:move;
+}
+.postit p{
+	text-align: center;
+	font-size:14px;
+	color:#333;
 }

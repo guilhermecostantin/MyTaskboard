@@ -69,5 +69,11 @@ class ProjetosController < ApplicationController
     end
   end
  
+ def lista
+   @projetos = Projeto.where(:nome=> /#{params[:q]}/).fields(:id, :nome)
+    respond_to do |format|
+      format.json{ render :json => @projetos }
+    end
+ end
   
 end

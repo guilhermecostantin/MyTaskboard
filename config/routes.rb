@@ -1,22 +1,23 @@
 Mytaskboard::Application.routes.draw do
-
+  root :to => "site#index"
   devise_for :usuarios, :path_names =>{:sign_in => 'login'}
   devise_scope :usuarios do
     get "login", :to => "devise/sessions#new"
   end
               
-  resources :usuarios
+  resources :usuarios do
+    post 'addproject', :on => :member    
+  end
  
-  
   resources :projetos do
-    member  do
-      post "adduser"
+    post 'adduser', :on => :member
+    get 'lista', :on => :collection
+    resources :tarefas  do
+      post 'muda_status', :on => :member
     end
-    resources :tarefas  
   end
 
-  root :to => "site#index"
-  match "site" => "site#index"
+ 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

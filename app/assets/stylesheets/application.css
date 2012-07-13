@@ -291,10 +291,22 @@ footer span a{
 	color:#333;
 	font-size: 22px;
 }
+#tarefas table{
+	width:100%;
+	border-collapse:collapse;
+}
+table thead{
+	display: table-header-group;
+}
+table thead th, table tbody td{
+	display: table-cell;
+}
+#tarefas table tbody{
+	vertical-align:top;
+}
 .colunas{
-	width:325px;
-	float:left;
-	height: 500px;
+	width:33%;
+	height:500px;
 }
 #coluna1,#coluna2{
 	border-right:1px solid #c0c0c0;

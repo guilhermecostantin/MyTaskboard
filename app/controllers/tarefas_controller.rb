@@ -95,4 +95,32 @@ class TarefasController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  def muda_status
+    @projeto = @usuario.projetos.find(params[:projeto_id])
+    @tarefa = @projeto.tarefas.find(params[:id])
+    
+    case params[:coluna]
+    when 'coluna1'
+      @tarefa.status = 1
+    when 'coluna2'
+      @tarefa.status = 2
+    when 'coluna 3'
+      @tarefa.status = 3
+    end
+   if @projeto.save
+      respond_to do |format|
+        format.html 
+        format.json { head :ok }
+      end
+    else
+      respond_to do |format|
+        format.html 
+        format.json { render json: @projeto.errors }
+      end
+   end
+  end
+  
+  
+  
 end

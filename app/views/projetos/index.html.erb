@@ -6,6 +6,14 @@
 			<%= render 'form' %>	
 		</div>
 		<br/>
+		<div id="formProjetos">
+		<%= form_tag ('/usuarios/'+@usuario.id+'/addproject') do%>
+			    <%= label_tag :projetos_id %><br />
+			    <%= text_field_tag :projetos_id %>
+			    <%= submit_tag %>
+			<% end %>
+		</div>		
+       
 	</div>
 	<div class="conteudoPagina">
 		<% @projetos.each do |projeto| %>

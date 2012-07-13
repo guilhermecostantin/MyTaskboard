@@ -8,75 +8,81 @@
 		    <%= text_field_tag :users_id %>
 		    <%= submit_tag %>
 		<% end %>		
-
-
-input type="text" id="demo-input-local" name="blah" />
-        <input type="button" value="Submit" />
-        <script type="text/javascript">
-
        
-       
-        $(document).ready(function() {
-            $("#users_id").tokenInput('/usuarios.json',{
-            	crossDomain:false,
-            	propertyToSearch: "email",
-            	theme:"facebook",
-        	 	hintText: "digite o email que deseja buscar",
-                noResultsText: "Nenhum usuário encontrado",
-                searchingText: "Procurando..."
-            });
-        });
-        </script>
 	</div>
 	<div class="conteudoPagina">
+		<span id="bucket3" ondragenter="return false" ondragover="return false" ondrop="trashIt(this, event)"><img src="https://www.ibm.com/developerworks/mydeveloperworks/blogs/bobleah/resource/n_trash.jpg" draggable="false"></span>
+		<table>
+			<thead>
+				<tr>
+					<td><h2>Tarefas</h2></td>
+					<td><h2>em andamento</h2></td>
+					<td><h2>prontas</h2></td>
+				</tr>	
+			</thead>
+			<tbody>
+				<tr>
+					<td id="coluna1" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
+						<% if @afazer%>
+						<%@afazer.each do |tarefa|%>
+							<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
+								<p><%=tarefa.descricao%></p> 
+							</div>
+						<%end%>
+						<%else%>
+						<p>Nenhuma tarefa a ser executada!</p>
+						<%end%>
+					</td>
+					<td id="coluna2" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
+						<% if @andamento%>
+						<%@andamento.each do |tarefa|%>
+							<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
+								<p><%=tarefa.descricao%></p> 
+							</div>
+						<%end%>
+						<%else%>
+						<p>Nenhuma tarefa a ser executada!</p>
+						<%end%>
+					</td>
+					<td id="coluna3" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
+						<% if @prontas%>
+						<%@prontas.each do |tarefa|%>
+							<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
+								<p><%=tarefa.descricao%></p> 
+							</div>
+						<%end%>
+						<%else%>
+						<p>Nenhuma tarefa a ser executada!</p>
+						<%end%>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+<script>
+function dragIt(target, e) {
+    e.dataTransfer.setData('postit', target.id);
+}
+function dropIt(target, e) {
+    var id = e.dataTransfer.getData('postit');
+    target.appendChild(document.getElementById(id)); 
+	pai = $('#'+id).parent().attr('id')
+    $.post("/projetos/<%=@projeto.id%>/tarefas/"+id+"/muda_status", {coluna : pai}, function(data){
+    		alert(data);
+    });
+    e.preventDefault();
+}
+function trashIt(target, e) {
+    var id = e.dataTransfer.getData('postit');
+    removeElement(id);
+    e.preventDefault();   
+}
+function removeElement(id)	{
+    var d_node = document.getElementById(id);
+    d_node.parentNode.removeChild(d_node);
+}
+</script>
 		
-		<div id="coluna1" class="colunas">
-			<h2>Tarefas</h2>
-			<br/>
-			<% if @afazer%>
-			<ul>
-				<%@afazer.each do |tarefa|%>
-					<li class="postit" draggable=true>
-						<p><%=tarefa.descricao%></p> 
-					</li>
-				<%end%>
-			</ul>
-			<%else%>
-			<p>Nenhuma tarefa a ser executada!</p>
-			<%end%>
-		</div>
-		<div id="coluna2" class="colunas">
-			<h2>Em andamento</h2>
-				<br/>
-			<% if @andamento%>
-			<ul>
-				<%@andamento.each do |tarefa|%>
-					<li>
-						<span>Descricao: <%=tarefa.descricao%>, Status: <%=tarefa.status%></span> 
-					</li>
-				<%end%>
-			</ul>
-			<%else%>
-			<p>Nenhuma tarefa a ser executada!</p>
-			<%end%>
-
-		</div>
-		<div id="coluna3" class="colunas">
-			<h2>Finalizadas</h2>
-				<br/>
-			<% if @prontas%>
-			<ul>
-				<%@prontas.each do |tarefa|%>
-					<li>
-						<span>Descricao: <%=tarefa.descricao%>, Status: <%=tarefa.status%></span> 
-					</li>
-				<%end%>
-			</ul>
-			<%else%>
-			<p>Nenhuma tarefa a ser executada!</p>
-			<%end%>
-
-		</div>
+		
 		
 		
 		<br/><br/><br/><br/>

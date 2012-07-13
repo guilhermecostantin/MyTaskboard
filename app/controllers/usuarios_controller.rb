@@ -11,7 +11,16 @@ class UsuariosController < ApplicationController
     end
   end
 
- 
+ def addproject
+   ids = params[:projetos_id].split(",")
+   ids.each do |id|
+     @usuario.permissoes_projetos << id
+   end
+   @usuario.save
+   respond_to do |format|
+      format.html { redirect_to projetos_url }
+    end
+ end
  
   
 end

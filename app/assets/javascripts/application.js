@@ -9,6 +9,7 @@
 //= require_tree .
 
 $(document).ready(function() {
+	
     $("#users_id").tokenInput('/usuarios.json',{
     	crossDomain:false,
     	propertyToSearch: "email",
@@ -17,9 +18,7 @@ $(document).ready(function() {
         noResultsText: "Nenhum usuário encontrado",
         searchingText: "Procurando..."
     });
-});
 
-$(document).ready(function() {
     $("#projetos_id").tokenInput('/projetos/lista.json',{
     	crossDomain:false,
     	propertyToSearch: "nome",
@@ -27,5 +26,9 @@ $(document).ready(function() {
 	 	hintText: "digite o nome do projeto que deseja buscar",
         noResultsText: "Nenhum projeto encontrado",
         searchingText: "Procurando..."
+    });
+    
+    $('#close').click(function(){
+    	$('#notice').slideUp(700);
     });
 });

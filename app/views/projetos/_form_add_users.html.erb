@@ -1,0 +1,7 @@
+<h3>Adicionar usuários</h3>
+<%= form_tag ('/projetos/'+@projeto.id+'/adduser') do%>
+	<fieldset>
+	    <%= text_field_tag :users_id %>
+	    <%= submit_tag "Add usuários", :class=>"botao" %>
+	</fieldset>
+<% end %>	

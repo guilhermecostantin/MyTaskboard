@@ -1,0 +1,8 @@
+<h3>Adicionar tarefas</h3>
+<%= form_tag ('/projetos/'+@projeto.id+'/tarefas') do%>
+	<fieldset>
+		<%= text_area_tag(:descricao,"",:class=>"boxTarefas", :placeholder=>"Separe as tarefas por um enter") %>
+	    <br />
+	    <%= submit_tag "Add tarefas", :class=>"botao" %>
+	</fieldset>
+<% end %>    

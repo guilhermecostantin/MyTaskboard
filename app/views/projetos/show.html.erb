@@ -1,65 +1,72 @@
-<p id="notice"><%= notice %></p>
 <div id="tarefas">
-	<div class="topoPagina">
-		<h1><%= @projeto.nome%></h1>
-		<br/>
-		<%= form_tag ('/projetos/'+@projeto.id+'/adduser') do%>
-		    <%= label_tag :users_id %><br />
-		    <%= text_field_tag :users_id %>
-		    <%= submit_tag %>
-		<% end %>		
-       
+	<%if notice%>
+	<div id="notice">
+		<p><%= notice %></p>
+		<a href="javascript:;" id="close">x</a>
 	</div>
-	<div class="conteudoPagina">
-		<span id="bucket3" ondragenter="return false" ondragover="return false" ondrop="trashIt(this, event)"><img src="https://www.ibm.com/developerworks/mydeveloperworks/blogs/bobleah/resource/n_trash.jpg" draggable="false"></span>
-		<table>
-			<thead>
-				<tr>
-					<td><h2>Tarefas</h2></td>
-					<td><h2>em andamento</h2></td>
-					<td><h2>prontas</h2></td>
-				</tr>	
-			</thead>
-			<tbody>
-				<tr>
-					<td id="coluna1" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
-						<% if @afazer%>
-						<%@afazer.each do |tarefa|%>
-							<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
-								<p><%=tarefa.descricao%></p> 
-							</div>
-						<%end%>
-						<%else%>
-						<p>Nenhuma tarefa a ser executada!</p>
-						<%end%>
-					</td>
-					<td id="coluna2" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
-						<% if @andamento%>
-						<%@andamento.each do |tarefa|%>
-							<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
-								<p><%=tarefa.descricao%></p> 
-							</div>
-						<%end%>
-						<%else%>
-						<p>Nenhuma tarefa a ser executada!</p>
-						<%end%>
-					</td>
-					<td id="coluna3" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
-						<% if @prontas%>
-						<%@prontas.each do |tarefa|%>
-							<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
-								<p><%=tarefa.descricao%></p> 
-							</div>
-						<%end%>
-						<%else%>
-						<p>Nenhuma tarefa a ser executada!</p>
-						<%end%>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-<script>
-function dragIt(target, e) {
+	<%end%>
+	<div class="semGrade">
+		<div class="container">
+			<h1><%= @projeto.nome%></h1>
+			<br />
+		</div>
+	</div>
+	<div id="conteudoTarefas">
+		<div class="conteudoPagina container">
+			<span id="lixeira" ondragenter="return false" ondragover="return false" ondrop="trashIt(this, event)">
+			</span>
+			<table>
+				<thead>
+					<tr>
+						<td><h2>Tarefas</h2></td>
+						<td><h2>em andamento</h2></td>
+						<td><h2>prontas</h2></td>
+					</tr>	
+				</thead>
+				<tbody>
+					<tr>
+						<td id="coluna1" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
+							<%@afazer.each do |tarefa|%>
+								<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
+									<p><%=tarefa.descricao%></p> 
+								</div>
+							<%end%>
+							
+						</td>
+						<td id="coluna2" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
+							<%@andamento.each do |tarefa|%>
+								<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
+									<p><%=tarefa.descricao%></p> 
+								</div>
+							<%end%>
+						</td>
+						<td id="coluna3" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
+							<%@prontas.each do |tarefa|%>
+								<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
+									<p><%=tarefa.descricao%></p> 
+								</div>
+							<%end%>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<br/>
+		</div>
+	</div>
+	<div id="containerFuncionalidades" class="semGrade">
+		<div class="container">
+			<div id="boxAddTarefa">
+				<%= render 'form_add_tarefas' %>	
+			</div>		
+			<div id="boxAddUser">
+				<%= render 'form_add_users' %>	
+			</div>
+			<br />
+		</div>
+	</div>	
+</div>
+<script type="text/javascript">
+	function dragIt(target, e) {
     e.dataTransfer.setData('postit', target.id);
 }
 function dropIt(target, e) {
@@ -79,34 +86,9 @@ function trashIt(target, e) {
 function removeElement(id)	{
     var d_node = document.getElementById(id);
     d_node.parentNode.removeChild(d_node);
+    $.ajax({
+    	type: 'DELETE',
+    	url: "/projetos/<%=@projeto.id%>/tarefas/"+id
+    });
 }
-</script>
-		
-		
-		
-		
-		<br/><br/><br/><br/>
-		
-		<br />
-		<%= form_tag ('/projetos/'+@projeto.id+'/tarefas') do%>
-		    <%= label_tag :descricao %><br />
-		    <%= text_field_tag :descricao %>
-		    <%= submit_tag %>
-		<% end %>
-	</div>
-	
-</div>
-
-
-
-
-
-
-
-
-
-<%= link_to 'Back', projetos_path%>
-<script type="text/javascript">
-
-	
 </script>

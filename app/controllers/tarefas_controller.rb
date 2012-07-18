@@ -51,16 +51,18 @@ class TarefasController < ApplicationController
   def create
     
     @projeto = @usuario.projetos.find(params[:projeto_id])    
-    @tarefa = Tarefa.new(:descricao => params[:descricao], :status => 1)
-    @projeto.tarefas << @tarefa
-    @usuario.projetos << @projeto
+    @array = params[:descricao].split("\r\n")
+    @array.each do |t|
+      @tarefa = Tarefa.new(:descricao => t, :status => 1)
+      @projeto.tarefas << @tarefa
+    end
     respond_to do |format|
-      if @usuario.save
-        format.html { redirect_to @projeto, notice: 'Tarefa was successfully created.' }
+      if @projeto.save
+        format.html { redirect_to @projeto, notice: 'As tarefas foram criadas com sucesso' }
         format.json { render json: @projeto, status: :created, location: @projeto}
       else
-        format.html { render action: "new" }
-        format.json { render json: @usuario.errors, status: :unprocessable_entity }
+        format.html { redirect_to @projeto, notice: 'Problemas ao criar as tarefas, tente novamente mais tarde.' }
+        format.json { render json: @projeto.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -87,11 +89,12 @@ class TarefasController < ApplicationController
   # DELETE /tarefas/1.json
   def destroy
     @projeto = @usuario.projetos.find(params[:projeto_id])
-    @tarefa = @projeto.tarefas.find(params[:tarefa_id])
-    @tarefa.destroy
+    t = @projeto.tarefas.find(params[:id])
+    @projeto.tarefas.delete(t)
+    @projeto.save
 
     respond_to do |format|
-      format.html { redirect_to tarefas_url }
+      format.html { redirect_to @projeto }
       format.json { head :ok }
     end
   end
@@ -105,7 +108,7 @@ class TarefasController < ApplicationController
       @tarefa.status = 1
     when 'coluna2'
       @tarefa.status = 2
-    when 'coluna 3'
+    when 'coluna3'
       @tarefa.status = 3
     end
    if @projeto.save

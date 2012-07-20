@@ -19,6 +19,9 @@
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 16px;
 }
+body{
+	background-image: url("/assets/padrao.png");
+}
 br{
 	clear:both;
 }
@@ -55,7 +58,7 @@ br{
 	height:60px;
 	background-color:#7d7d7d;
 }
-#containerTopo, #containerFooter, #containerBanner, #registro, #login, .container{
+#containerTopo, #containerBanner, #registro, #login, .container{
 	width:980px;
 	margin: 0 auto;
 }
@@ -87,23 +90,17 @@ br{
 #botao{
 	border: 1px solid #707070;
 }
-#containerFooter{
-	border-top: 1px solid #e1e1e1;
+footer{
+	padding: 20px 0;
 }
 footer span{
 	font-size:13px;
-	color:#b4b4b4;
+	color:#7d7d7d;
 	float:left;
-	margin:20px 0;
-}
-footer span a{
-	text-decoration:underline;
-	font-size: 1em;
-	color:#b4b4b4;
+	margin-top:10px;
 }
 #contIcon{
 	float:right;
-	margin-top:10px;
 }
 .socialIcon{
 	height:32px;
@@ -123,7 +120,9 @@ footer span a{
 /*------- INDEX --------*/
 /*----------------------*/
 
-
+.contInicial{
+	margin-bottom:200px;
+}
 #banner{
 	height:400px;
 	background-color:#e6e6e6;
@@ -239,80 +238,80 @@ footer span a{
 /*-------------------------*/
 /*------- PROJETOS --------*/
 /*-------------------------*/
-#projetos{
-	margin-bottom:200px;
-}
 .topoPagina{
 	padding-bottom:25px;
 	margin-bottom:30px;
 	border-bottom:1px solid #e1e1e1;
 }
 .conteudoPagina{
-	padding-top:25px;
 	margin-bottom:30px;
 }
 #projetos h1, #tarefas h1{
-	font-size:32px;
+	font-size:37px;
 	color:#666;
 	font-weight:normal;
-	margin-top:25px;
 	float: left;
 }
+#projetos h1{margin:25px 0 20px;;}
+#tarefas h1 {margin-top:20px;}
 #projetos p{
 	font-size:16px;
 	color:#444;
-	margin-top:25px;
 	float:left;
+}
+#mensagemInicial{
+	margin-top:25px;
+	margin-bottom:50px;
 }
 #contForm{
 	float:right;
 	width:300px;
 }
 .inputProject{
-	float:left;
-	margin-top:15px;
-	height:30px;
-	border:1px solid #d3d3d3;
-	width:200px;
-	margin-bottom:17px;
+	height: 30px;
+	border: 1px solid #d3d3d3;
+	width: 390px;
 	font-size: 1em;
 	padding-left: 10px;
+}
+.containerFolder{
+	float:left;
+	margin:0 20px 50px 0;
+}
+.deleteFolder{
+	float:right;
+	color:#666;
+	font-weight:bold;
+	margin-right:20px;
 }
 .folder{
 	display:block;
 	float:left;
-	width:272px;
-	height:207px;
+	width:232px;
+	height:107px;
 	background-image: url("/assets/folder.png");
-	margin:0 20px 50px 0;
 	position:relative;
-}
-.folder span{
-	display:block;
-	margin:80px auto 0;
-	width:90%;
-	text-align:center;
-	height:130px;
 	font-size:16px;
 	color:#333;
+	text-align:center;
+	padding:80px 20px 20px;
 }
-.folder a{
-	position:absolute;
-	right:15px;
-	top:45px;
-	color:#666;
-	text-decoration:none;
-	font-weight:bold;
-}
+
+
 /*------------------------*/
 /*------- TAREFAS --------*/
 /*------------------------*/
-#tarefas{
-	background-image: url("/assets/padrao.png");
-}
 .semGrade{
 	background-color:#e8e8e8;
 	padding-bottom:25px;
+	border-bottom: 1px dashed #7d7d7d;
+}
+.containerFuncionalidades{
+	background-color:#e8e8e8;
+	width:880px;
+	margin:0 auto;
+	border:1px dashed #7d7d7d;
+	padding:20px 50px;
 }
 #tarefas h2{
 	width:100%;
@@ -321,8 +320,8 @@ footer span a{
 	margin-bottom:20px;
 	font-size: 22px;
 }
-#tarefas h3{
-	color: #666;
+#projetos h3, #tarefas h3{
+	color: #7d7d7d;
 	font-size: 22px;
 	margin-bottom: 5px;
 }
@@ -361,10 +360,6 @@ table thead th, table tbody td{
 	font-size:14px;
 	color:#333;
 }
-#containerFuncionalidades{
-	border-top:1px dashed #999;
-	padding-top:20px;
-}
 .boxTarefas{
 	border:1px solid #ccc;
 	width:100%;
@@ -373,10 +368,12 @@ table thead th, table tbody td{
 }
 #boxAddTarefa,#boxAddUser{
 	width:400px;
-	float:left;
+}
+#boxAddUser{
+	float:right;
 }
 #boxAddTarefa{
-	margin-right:100px;
+	float:left;
 }
 #lixeira{
 	float:right;
@@ -384,4 +381,5 @@ table thead th, table tbody td{
 	background-image: url("/assets/lixeira.png");
 	width:50px;
 	height:50px;
+	margin-top:10px;
 }

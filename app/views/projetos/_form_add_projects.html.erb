@@ -1,0 +1,7 @@
+<h3>Buscar projetos</h3>
+<%= form_tag ('/usuarios/'+@usuario.id+'/addproject') do%>
+	<fieldset>
+	    <%= text_field_tag :projetos_id %>
+	    <%= submit_tag "Add projetos", :class=>"botao" %>
+	</fieldset>
+<% end %>	

@@ -10,11 +10,16 @@ class ProjetosController < ApplicationController
     if !@usuario.permissoes_projetos.empty?
       @permitidos = Array.new
       @usuario.permissoes_projetos.each do |pp|
-        @permitidos << Projeto.find(pp)
+        p = Projeto.find(pp)
+        if p.nil?
+          @usuario.permissoes_projetos.delete(pp)
+          @usuario.save
+        else
+          @permitidos << p  
+        end
       end
     end
     @usuario_logado = usuario_signed_in?
-    
   end
 
   def create
@@ -24,7 +29,7 @@ class ProjetosController < ApplicationController
     respond_to do |format|
       if @projeto.save
         #trocar esses redirects aqui
-        format.html { redirect_to @projeto, notice: 'Projeto was successfully created.' }
+        format.html { redirect_to @projeto, notice: 'O projeto foi criado com sucesso.' }
         format.json { render json: @projeto, status: :created, location: @projeto }
       else
         format.html { render action: "new" }
@@ -35,7 +40,7 @@ class ProjetosController < ApplicationController
   
   def show
     @users = Usuario.all
-    @projeto = @usuario.projetos.find(params[:id])
+    @projeto = Projeto.find(params[:id])
     @tarefas = @projeto.tarefas
     @afazer = @tarefas.select{|x| x.status==1}
     @andamento = @tarefas.select{|x| x.status==2}
@@ -49,12 +54,17 @@ class ProjetosController < ApplicationController
    # DELETE /projetos/1
   # DELETE /projetos/1.json
   def destroy
-    @usuario.projetos(params[:id]).remove()
     
-    respond_to do |format|
-      format.html { redirect_to projetos_url }
-      format.json { head :ok }
+    if  @usuario.projetos.select{|x| x.id == params[:id]}
+      Projeto.find(params[:id]).destroy
+      respond_to do |format|
+        format.html { redirect_to projetos_url }
+        format.json { head :ok }
+      end
+    else
+      raise SecurityError, "Apenas o dono do projeto pode excluir esse projeto"
     end
+    
   end
   
   def adduser

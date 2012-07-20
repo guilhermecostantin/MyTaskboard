@@ -1,42 +1,46 @@
-<div id="projetos" class="container">
-	<div class="topoPagina">
-		<h1>Projects</h1>
-		<p>Ready to begin? It's easy! Just enter a name in the box and create a new project!</p>
-		<div id="contForm">
-			<%= render 'form' %>	
-		</div>
-		<br/>
-		<div id="formProjetos">
-		<%= form_tag ('/usuarios/'+@usuario.id+'/addproject') do%>
-			    <%= label_tag :projetos_id %><br />
-			    <%= text_field_tag :projetos_id %>
-			    <%= submit_tag %>
-			<% end %>
+<div id="projetos">
+<% if @projetos.empty? and !@permitidos %>
+	<div class="container contInicial">
+		<h1>Projects</h1><br />
+		<p id="mensagemInicial">Pronto para começar? É fácil, basta criar um novo projeto ou buscar um projeto existente.</p>
+		<div id="boxAddTarefa">
+			<%= render 'form_create_project' %>	
 		</div>		
-       
-	</div>
-	<div class="conteudoPagina">
-		<% @projetos.each do |projeto| %>
-		<div class="folder">
-			<%= link_to 'x', projeto, confirm: 'Are you sure? all the tasks will be deleted, there is no way back!', method: :delete %>	
-			<span><%= projeto.nome %></span>
-			<%= link_to "projeto", projeto%>
+		<div id="boxAddUser">
+			<%= render 'form_add_projects' %>	
 		</div>
+		<br />
+	</div>
+<% else %>
+	<div class="conteudoPagina container">
+		<h1>Projects</h1><br />
+		<% @projetos.each do |projeto| %>
+			<div class="containerFolder">
+			<%= link_to 'x', projeto, confirm: 'Tem certeza? todas as tarefas serão deletadas, não tem volta!', :class=>"deleteFolder" ,method: :delete %>	
+			<br />
+			<%= link_to projeto.nome, projeto, :class=>"folder"%>
+			</div>
 		<% end %>
 		
 		<% if @permitidos%>
 			<% @permitidos.each do |projeto| %>
-			<div class="folder">
-				<%= link_to 'x', projeto, confirm: 'Are you sure? all the tasks will be deleted, there is no way back!', method: :delete %>	
-				<span><%= projeto.nome %></span>
-				<%= link_to "projeto", projeto%>
+			<div class="containerFolder">
+			<%= link_to projeto.nome, projeto, :class=>"folder"%>
 			</div>
 			<% end %>
-		<%end%>
+		<%end%><br />
 	</div>
-	<br/>
+	<div class="containerFuncionalidades">
+		<div id="boxAddTarefa">
+			<%= render 'form_create_project' %>	
+		</div>		
+		<div id="boxAddUser">
+			<%= render 'form_add_projects' %>	
+		</div>
+		<br />
+	</div>
+<%end%>
 </div>
-
 
 
 

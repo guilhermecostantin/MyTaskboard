@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
-if ENV['MONGOLAB_URI'] then
+if ENV['MONGOHQ_URL'] then
   MongoMapper.config = { 
-    Rails.env => { 'uri' => ENV['MONGOLAB_URI'] } }
+   Rails.env => { 'uri' => ENV['MONGOHQ_URL'] } }
   MongoMapper.connect(Rails.env)
 else
   MongoMapper.connection = Mongo::Connection.new('localhost', 27017)

@@ -1,18 +1,30 @@
 <div id="tarefas">
-	<%if notice%>
-	<div id="notice">
-		<p><%= notice %></p>
-		<a href="javascript:;" id="close">x</a>
-	</div>
-	<%end%>
 	<div class="semGrade">
 		<div class="container">
 			<h1><%= @projeto.nome%></h1>
 			<br />
 		</div>
 	</div>
+	<%if @tarefas.empty? %>
+	<div class="container contInicial">
+		<p id="mensagemInicial">Com o projeto criado basta criar suas tarefas para popular o quadro e adicionar outros usuários para colaborar neste projeto.</p>
+		<div id="boxAddTarefa">
+			<%= render 'form_add_tarefas' %>	
+		</div>		
+		<div id="boxAddUser">
+			<%= render 'form_add_users' %>	
+		</div>
+		<br />
+	</div>
+	<%else%>
 	<div id="conteudoTarefas">
 		<div class="conteudoPagina container">
+			<%if notice%>
+			<div id="notice">
+				<p><%= notice %></p>
+				<a href="javascript:;" id="close">x</a>
+			</div>
+			<%end%>
 			<span id="lixeira" ondragenter="return false" ondragover="return false" ondrop="trashIt(this, event)">
 			</span>
 			<table>
@@ -53,17 +65,16 @@
 			<br/>
 		</div>
 	</div>
-	<div id="containerFuncionalidades" class="semGrade">
-		<div class="container">
-			<div id="boxAddTarefa">
-				<%= render 'form_add_tarefas' %>	
-			</div>		
-			<div id="boxAddUser">
-				<%= render 'form_add_users' %>	
-			</div>
-			<br />
+	<div class="containerFuncionalidades">
+		<div id="boxAddTarefa">
+			<%= render 'form_add_tarefas' %>	
+		</div>		
+		<div id="boxAddUser">
+			<%= render 'form_add_users' %>	
 		</div>
+		<br />
 	</div>	
+	<%end%>
 </div>
 <script type="text/javascript">
 	function dragIt(target, e) {

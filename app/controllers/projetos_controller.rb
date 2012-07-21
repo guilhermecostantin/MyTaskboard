@@ -1,39 +1,22 @@
 class ProjetosController < ApplicationController
-  # GET /projetos
-  # GET /projetos.json
   before_filter :authenticate_usuario!
   before_filter {@usuario = current_usuario}
   
   def index
     @novo_projeto = Projeto.new    
     @projetos = @usuario.projetos
-    if !@usuario.permissoes_projetos.empty?
-      @permitidos = Array.new
-      @usuario.permissoes_projetos.each do |pp|
-        p = Projeto.find(pp)
-        if p.nil?
-          @usuario.permissoes_projetos.delete(pp)
-          @usuario.save
-        else
-          @permitidos << p  
-        end
-      end
-    end
-    @usuario_logado = usuario_signed_in?
+    @permitidos = @usuario.projetos_permitidos
   end
 
   def create
-    
     @projeto = Projeto.new(params[:projeto])
-    
     respond_to do |format|
       if @projeto.save
-        #trocar esses redirects aqui
         format.html { redirect_to @projeto, notice: 'O projeto foi criado com sucesso.' }
         format.json { render json: @projeto, status: :created, location: @projeto }
       else
-        format.html { render action: "new" }
-        format.json { render json: @projeto.errors, status: :unprocessable_entity }
+        flash[:error] = "Ocorreu um erro e o projeto nao pode ser salvo, tente novamente mais tarde"
+        redirect_to projetos_path
       end
     end
   end
@@ -51,20 +34,18 @@ class ProjetosController < ApplicationController
     end
   end
 
-   # DELETE /projetos/1
-  # DELETE /projetos/1.json
   def destroy
-    
-    if  @usuario.projetos.select{|x| x.id == params[:id]}
+    permissao = @usuario.verifica_permissao params[:id]
+    if permissao
       Projeto.find(params[:id]).destroy
       respond_to do |format|
-        format.html { redirect_to projetos_url }
+        format.html { redirect_to projetos_url, notice: "Projeto deletado com sucesso" }
         format.json { head :ok }
       end
     else
+      #falta exibir para o usuario
       raise SecurityError, "Apenas o dono do projeto pode excluir esse projeto"
     end
-    
   end
   
   def adduser
@@ -75,7 +56,7 @@ class ProjetosController < ApplicationController
       u.save
     end
     respond_to do |format|
-      format.html { redirect_to projetos_url }
+      format.html { redirect_to :back }
     end
   end
  

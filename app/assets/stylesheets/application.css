@@ -133,7 +133,6 @@ footer span{
 }
 #bannerEsquerda{
 	float:left;
-	width:480px; 
 }
 #bannerEsquerda h1{
 	font-size:50px;
@@ -173,7 +172,7 @@ footer span{
 	float:right;
 }
 #bannerDireita img{
-	margin-top:40px;
+	margin-top:25px;
 }
 #colunaEsquerda{
 	float:left;
@@ -254,12 +253,10 @@ footer span{
 }
 #projetos h1{margin:25px 0 20px;;}
 #tarefas h1 {margin-top:20px;}
-#projetos p{
+#mensagemInicial{
 	font-size:16px;
 	color:#444;
 	float:left;
-}
-#mensagemInicial{
 	margin-top:25px;
 	margin-bottom:50px;
 }
@@ -277,26 +274,31 @@ footer span{
 .containerFolder{
 	float:left;
 	margin:0 20px 50px 0;
+	position:relative;
 }
 .deleteFolder{
-	float:right;
-	color:#666;
-	font-weight:bold;
-	margin-right:20px;
+	color: #666;
+	font-weight: bold;
+	display: block;
+	height: 16px;
+	position: absolute;
+	right: 20px;
 }
 .folder{
 	display:block;
 	float:left;
 	width:232px;
 	height:107px;
-	background-image: url("/assets/folder.png");
 	position:relative;
 	font-size:16px;
 	color:#333;
 	text-align:center;
 	padding:80px 20px 20px;
+	margin-top:20px;
 }
-
+.folder:hover{background-position:0 -208px;}
+.ownerFolder{background-image: url("/assets/folder.png");}
+.folderBlue{background-image: url("/assets/folder_blue.png");}
 
 /*------------------------*/
 /*------- TAREFAS --------*/

@@ -13,21 +13,25 @@
 	</div>
 <% else %>
 	<div class="conteudoPagina container">
+		<%if notice%>
+		<div id="notice">
+			<p><%= notice %></p>
+			<a href="javascript:;" id="close">x</a>
+		</div>
+		<%end%>
 		<h1>Projects</h1><br />
 		<% @projetos.each do |projeto| %>
 			<div class="containerFolder">
 			<%= link_to 'x', projeto, confirm: 'Tem certeza? todas as tarefas serão deletadas, não tem volta!', :class=>"deleteFolder" ,method: :delete %>	
-			<br />
-			<%= link_to projeto.nome, projeto, :class=>"folder"%>
+			<%= link_to projeto.nome, projeto, :class=>"folder ownerFolder"%>
 			</div>
 		<% end %>
 		
-		<% if @permitidos%>
-			<% @permitidos.each do |projeto| %>
-			<div class="containerFolder">
-			<%= link_to projeto.nome, projeto, :class=>"folder"%>
-			</div>
-			<% end %>
+		<% @permitidos.each do |projeto| %>
+		<div class="containerFolder">
+		<%= link_to 'x', projeto, confirm: 'Tem certeza? todas as tarefas serão deletadas, não tem volta!', :class=>"deleteFolder" ,method: :delete %>
+		<%= link_to projeto.nome, projeto, :class=>"folder folderBlue"%>
+		</div>
 		<%end%><br />
 	</div>
 	<div class="containerFuncionalidades">

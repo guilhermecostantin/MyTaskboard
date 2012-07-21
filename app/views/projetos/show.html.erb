@@ -84,9 +84,7 @@ function dropIt(target, e) {
     var id = e.dataTransfer.getData('postit');
     target.appendChild(document.getElementById(id)); 
 	pai = $('#'+id).parent().attr('id')
-    $.post("/projetos/<%=@projeto.id%>/tarefas/"+id+"/muda_status", {coluna : pai}, function(data){
-    		alert(data);
-    });
+    $.post("/projetos/<%=@projeto.id%>/tarefas/"+id+"/muda_status", {coluna : pai});
     e.preventDefault();
 }
 function trashIt(target, e) {

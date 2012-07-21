@@ -21,4 +21,34 @@ class Usuario
   attr_accessible :email, :password, :password_confirmation, :remember_me
   
   many :projetos
+  
+  def projetos_permitidos
+    permitidos = Array.new
+      if !self.permissoes_projetos.empty?
+        self.permissoes_projetos.each do |id_projeto|
+          projeto = Projeto.find(id_projeto)
+          if projeto.nil?
+            self.limpa_permissoes id_projeto
+          else
+            permitidos << projeto  
+          end
+        end
+      end
+     return permitidos
+  end
+  
+  def limpa_permissoes id_projeto
+    self.permissoes_projetos.delete(id_projeto)
+    self.save
+  end
+  
+  def verifica_permissao projeto_id
+    owner_id = Projeto.find(projeto_id).usuario_id
+    if self.id == owner_id
+      return true
+    else
+      return false
+    end
+  end
+  
 end

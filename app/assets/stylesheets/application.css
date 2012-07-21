@@ -220,7 +220,7 @@ footer span{
 /*----------------------*/
 /*------- LOGIN --------*/
 /*----------------------*/
-
+#login{margin-bottom:100px;}
  #login form{
  	float:left;
  	width:400px;

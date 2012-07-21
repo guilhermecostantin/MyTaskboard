@@ -12,9 +12,9 @@
     </div>
   <% end %>
 	<fieldset>
-		<%= f.text_field :nome, :class=>"inputProject", :placeholder=>"Project name" %>
+		<%= f.text_field :nome, :class=>"inputProject", :placeholder=>"Nome do projeto" %>
 		<%= f.hidden_field :usuario_id, :value => @usuario.id%>
-    	<%= f.submit "Create", :id=>"botaoRegistro", :class=>"botao" %>	
+    	<%= f.submit "Criar", :id=>"botaoRegistro", :class=>"botao" %>	
 	</fieldset>
     
 <% end %>

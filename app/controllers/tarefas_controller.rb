@@ -1,8 +1,5 @@
 class TarefasController < ApplicationController
  
-  before_filter :authenticate_usuario!
-  before_filter {@usuario = current_usuario}
-  
   def create
     @projeto = @usuario.projetos.find(params[:projeto_id])    
     @array = params[:descricao].split("\r\n")

@@ -1,6 +1,4 @@
 class ProjetosController < ApplicationController
-  before_filter :authenticate_usuario!
-  before_filter {@usuario = current_usuario}
   
   def index
     @novo_projeto = Projeto.new    

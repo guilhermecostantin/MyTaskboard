@@ -1,6 +1,12 @@
-<div id="projetos">
-<% if @projetos.empty? and !@permitidos %>
-	<div class="container contInicial">
+<div id="projetos" class="container">
+<%if notice%>
+<div id="notice">
+	<p><%= notice %></p>
+	<a href="javascript:;" id="close">x</a>
+</div>
+<%end%>
+<% if @projetos.empty? and @permitidos.empty? %>
+	<div class="contInicial">
 		<h1>Projects</h1><br />
 		<p id="mensagemInicial">Pronto para começar? É fácil, basta criar um novo projeto ou buscar um projeto existente.</p>
 		<div id="boxAddTarefa">
@@ -12,13 +18,7 @@
 		<br />
 	</div>
 <% else %>
-	<div class="conteudoPagina container">
-		<%if notice%>
-		<div id="notice">
-			<p><%= notice %></p>
-			<a href="javascript:;" id="close">x</a>
-		</div>
-		<%end%>
+	<div class="conteudoPagina">
 		<h1>Projects</h1><br />
 		<% @projetos.each do |projeto| %>
 			<div class="containerFolder">

@@ -1,5 +1,5 @@
 Mytaskboard::Application.routes.draw do
-  root :to => "site#index"
+  root :to => "site#index"  
   devise_for :usuarios, :path_names =>{:sign_in => 'login'}
   devise_scope :usuarios do
     get "login", :to => "devise/sessions#new"

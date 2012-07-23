@@ -4,7 +4,7 @@ class Tarefa
 
   key :descricao, String
   key :status, Integer
-
+  timestamps!
   belongs_to :projetos
   
   def change_status string

@@ -11,6 +11,7 @@ Mytaskboard::Application.routes.draw do
  
   resources :projetos do
     post 'adduser', :on => :member
+    get 'burndown', :on => :member
     get 'lista', :on => :collection
     resources :tarefas  do
       post 'muda_status', :on => :member

@@ -46,6 +46,19 @@ class ProjetosController < ApplicationController
     end
   end
   
+  def burndown
+    total_tarefas = Projeto.find(params[:id]).tarefas.count * 2
+    dias = 6
+    razao = total_tarefas/dias
+    anterior = total_tarefas
+    @array = Array.new
+    @array << [0,total_tarefas]
+    dias.times do |dia|
+      @array << [dia+1, anterior-razao]
+      anterior -= razao
+    end
+  end
+  
   def adduser
     ids = params[:users_id].split(",")
     ids.each do |id|

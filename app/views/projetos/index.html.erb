@@ -1,5 +1,5 @@
 <div id="projetos" class="container">
-<%if notice%>
+<%if notice and !notice.empty?%>
 <div id="notice">
 	<p><%= notice %></p>
 	<a href="javascript:;" id="close">x</a>

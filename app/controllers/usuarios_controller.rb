@@ -5,7 +5,7 @@ class UsuariosController < ApplicationController
   before_filter {@usuario = current_usuario}
   
   def index
-    @usuarios = Usuario.where(:email=> /#{params[:q]}/)
+    @usuarios = Usuario.where(:id.ne => @usuario.id, :email=> /#{params[:q]}/)
     respond_to do |format|
       format.json{ render :json => @usuarios }
     end
@@ -14,12 +14,23 @@ class UsuariosController < ApplicationController
  def addproject
    ids = params[:projetos_id].split(",")
    ids.each do |id|
-     @usuario.permissoes_projetos << id
+     projeto = Projeto.find(id)
+     projeto.solicitacoes_entrada << @usuario.id
+     projeto.save
    end
-   @usuario.save
    respond_to do |format|
-      format.html { redirect_to projetos_url }
+      format.html { redirect_to projetos_url, notice: "solicitacao enviada aos donos do projeto" }
     end
+   
+   
+   # ids = params[:projetos_id].split(",")
+   # ids.each do |id|
+     # @usuario.permissoes_projetos << id
+   # end
+   # @usuario.save
+   # respond_to do |format|
+      # format.html { redirect_to projetos_url }
+    # end
  end
  
   

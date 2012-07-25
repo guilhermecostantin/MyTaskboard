@@ -41,15 +41,25 @@ class ProjetosController < ApplicationController
         format.json { head :ok }
       end
     else
-      #falta exibir para o usuario
-      raise SecurityError, "Apenas o dono do projeto pode excluir esse projeto"
+      @usuario.permissoes_projetos.delete(params[:id])
+      if @usuario.save
+      respond_to do |format|
+        format.html { redirect_to projetos_url, notice: "Projeto removido com sucesso" }
+        format.json { head :ok }
+      end
+      else
+        respond_to do |format|
+        format.html { redirect_to projetos_url, notice: "Ocorreu um erro ao salvar, tente novamente mais tarde." }
+        format.json { render json: @projeto.errors, status: :unprocessable_entity }
+      end
+      end
     end
   end
   
   def burndown
     total_tarefas = Projeto.find(params[:id]).tarefas.count * 2
     dias = 6
-    razao = total_tarefas/dias
+    razao = total_tarefas/6.00
     anterior = total_tarefas
     @array = Array.new
     @array << [0,total_tarefas]
@@ -71,8 +81,16 @@ class ProjetosController < ApplicationController
     end
   end
  
+ def solicitacoes
+  solicitacoes = Projeto.find(params[:id]).solicitacoes_entrada
+  @usuarios = Array.new
+  solicitacoes.each do |id|
+    @usuarios << Usuario.find(id)
+  end  
+ end
+ 
  def lista
-   @projetos = Projeto.where(:nome=> /#{params[:q]}/).fields(:id, :nome)
+   @projetos = Projeto.where(:usuario_id.ne => @usuario.id, :nome=> /#{params[:q]}/).fields(:id, :nome)
     respond_to do |format|
       format.json{ render :json => @projetos }
     end

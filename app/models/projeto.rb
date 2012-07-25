@@ -2,6 +2,7 @@ class Projeto
   include MongoMapper::Document
   key :nome, String
   key :usuario_id, ObjectId
+  key :solicitacoes_entrada, Array
   timestamps!
   validates :nome, :presence =>true
   validates :usuario_id, :presence =>true
@@ -13,4 +14,6 @@ class Projeto
     t = self.tarefas.find(id)
     self.tarefas.delete(t)
   end
+  
+  
 end

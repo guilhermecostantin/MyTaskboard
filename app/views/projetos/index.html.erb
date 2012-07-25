@@ -7,7 +7,7 @@
 <%end%>
 <% if @projetos.empty? and @permitidos.empty? %>
 	<div class="contInicial">
-		<h1>Projects</h1><br />
+		<h1>Projetos</h1><br />
 		<p id="mensagemInicial">Pronto para começar? É fácil, basta criar um novo projeto ou buscar um projeto existente.</p>
 		<div id="boxAddTarefa">
 			<%= render 'form_create_project' %>	
@@ -19,7 +19,7 @@
 	</div>
 <% else %>
 	<div class="conteudoPagina">
-		<h1>Projects</h1><br />
+		<h1>Projetos</h1><br />
 		<% @projetos.each do |projeto| %>
 			<div class="containerFolder">
 			<%= link_to 'x', projeto, confirm: 'Tem certeza? todas as tarefas serão deletadas, não tem volta!', :class=>"deleteFolder" ,method: :delete %>	
@@ -29,6 +29,7 @@
 		
 		<% @permitidos.each do |projeto| %>
 		<div class="containerFolder">
+			<%= link_to 'x', projeto, confirm: 'Tem certeza? O projeto não será deletado, apenas removido de sua lista.', :class=>"deleteFolder" ,method: :delete %>
 		<%= link_to projeto.nome, projeto, :class=>"folder folderBlue"%>
 		</div>
 		<%end%><br />

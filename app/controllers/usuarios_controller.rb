@@ -14,24 +14,25 @@ class UsuariosController < ApplicationController
  def addproject
    ids = params[:projetos_id].split(",")
    ids.each do |id|
-     projeto = Projeto.find(id)
-     projeto.solicitacoes_entrada << @usuario.id
-     projeto.save
+     if !@usuario.permissoes_projetos.include?(id)
+       projeto = Projeto.find(id)
+       projeto.solicitacoes_entrada << @usuario.id
+       projeto.save
+     end
    end
    respond_to do |format|
       format.html { redirect_to projetos_url, notice: "solicitacao enviada aos donos do projeto" }
     end
-   
-   
-   # ids = params[:projetos_id].split(",")
-   # ids.each do |id|
-     # @usuario.permissoes_projetos << id
-   # end
-   # @usuario.save
-   # respond_to do |format|
-      # format.html { redirect_to projetos_url }
-    # end
  end
  
+ def aceitaProjeto
+   usuario = Usuario.find(params[:id])
+   projeto = Projeto.find(params[:projeto_id])
+   usuario.inclui_projeto params[:projeto_id]
+   projeto.tira_solicitacao usuario.id
+   respond_to do |format|
+      format.html { redirect_to projeto_path(projeto), notice: "deu certo brow" }
+   end
+ end
   
 end

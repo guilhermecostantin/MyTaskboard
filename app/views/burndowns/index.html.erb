@@ -1,0 +1,83 @@
+<div id="burndown">
+	<div class="semGrade">
+		<div id="topoAbas" class="container">
+			<h1><%= @projeto.nome%></h1>
+			<ul>
+				<li><%=link_to "Tarefas", projeto_path(@projeto)%></li>
+				<li id="selecionado">Burndown</li>
+				<li><a href="#"><%=link_to "Solicitações", solicitacoes_projeto_path(@projeto)%></a></li>
+			</ul>
+			<br />
+		</div>
+	</div>
+	<div class="container">
+	<h2>Burndown</h2><br />
+	<% if @burndown.nil? %>
+		<p>
+			Um Burndown é um gráfico que mensura a quantidade de trabalho restante pelo tempo que falta, segue  seguinte lógica: Se uma tarefa está na coluna de 
+			"tarefas", ela tem peso 2, na coluna "em andamento" tem peso 1. No gráfico, o eixo y representa a soma de todas as tarefas (com os devidos pesos) e o eixo x 
+			representa os dias. No final de cada dia, é calculado a situação das tarefas, multiplipando a quantidade de tarefas pelo devido peso, e é feito um novo marco no gráfico
+			para que você possa visualizar a quantidade de trabalho restante. O gráfico possui também o que chamamos de "situação ideal" para fins comparativos.
+		</p>
+		<br/>
+		<p>Este projeto ainda não possui nenhum burndown, para criar um entre com as datas de início e fim</p>
+		<div id="containerFormBurn">	
+			<%= form_tag ('/projetos/'+params[:projeto_id]+'/burndown') do%>
+				<fieldset>
+					<%= label_tag :data_inicio, "De" %>
+					<%= text_field_tag :data_inicio,"", :placeholder=>"Data Início" %>
+					<%= label_tag :data_fim, "até" %>
+					<%= text_field_tag :data_fim,"",:placeholder=>"Data Fim"%>
+				    <%= submit_tag "Criar burndown", :class=>"botao" %>
+				</fieldset>
+			<% end %>    
+		</div>
+		<script>
+			$(function() {
+				$( "#data_inicio" ).datepicker({
+					defaultDate: "+1w",
+				 	dateFormat: "dd-mm-yy",	
+					onSelect: function( selectedDate ) {
+						$( "#data_fim" ).datepicker( "option", "minDate", selectedDate );
+					}
+				});
+				$( "#data_fim" ).datepicker({
+					defaultDate: "+1w",
+					changeMonth: true,
+					numberOfMonths: 1,
+					onSelect: function( selectedDate ) {
+						$( "#data_inicio" ).datepicker( "option", "maxDate", selectedDate );
+					}
+				});
+			});
+			</script>
+		</div>
+	<%else%>
+	
+	<div id="chart_div"></div>
+	
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+		var data = <%= raw @array %>;
+		var inicio = <%= raw @pontuacao_inicial %>;
+		var razao = <%= raw @razao %>;
+		var duracao = <%= raw @duracao %>;
+		pontos = montaArray(data, inicio, razao, duracao);
+	
+		google.load("visualization", "1", {packages:["corechart"]});
+		google.setOnLoadCallback(drawChart);
+	  	function drawChart() {
+		    var data = google.visualization.arrayToDataTable(pontos);
+			var options = {
+			  chartArea:{left:30,width:"90%",height:"90%"},
+			  animation: {duration:3000, easing: 'out'},
+			legend:{position:'top',alignment:'end'},
+	          series: [{color: '#CCCCCC'},{color: 'black'}]
+			};
+			var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+			    chart.draw(data, options);
+			  };
+	</script>
+	<%end%>
+	</div>
+</div>

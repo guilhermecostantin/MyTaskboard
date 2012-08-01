@@ -9,11 +9,21 @@ class Projeto
 
   belongs_to :usuario
   many :tarefas
+  many :burndowns
   
   def delete_task id
     t = self.tarefas.find(id)
     self.tarefas.delete(t)
   end
-  
-  
+  def tira_solicitacao id
+    self.solicitacoes_entrada.delete(id)
+    self.save
+  end
+  def burndown_atual
+    if !self.burndowns.empty?
+      @burndown = self.burndowns.last
+    else
+      return nil
+    end
+  end
 end

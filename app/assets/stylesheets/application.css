@@ -48,6 +48,42 @@ br{
 	font-weight:bold;
 	font-size:14px;
 }
+/*------------------------------*/
+/*------- Topo com abas --------*/
+/*------------------------------*/
+#topoAbas{
+	position:relative;
+	 height:90px;
+}
+#topoAbas ul{
+	position: absolute;
+	right: 0;
+	bottom: -1px;
+	list-style:none;
+}
+#topoAbas li{
+	float:left;
+	padding:5px;
+	font-weight:bold;
+	font-size:14px;
+	color:#807d7d;
+}
+#topoAbas #selecionado{
+	border-top:1px dashed #807d7d;
+	border-left:1px dashed #807d7d;
+	border-right:1px dashed #807d7d;
+	border-bottom:1px solid #fff;
+	background-color:#FFF;
+}
+#topoAbas a{
+	font-weight:bold;
+	font-size:14px;
+	color:#807d7d;
+}
+#topoAbas a:hover{
+	color:#999;
+}
+
 /*----------------------------*/
 /*------- application --------*/
 /*----------------------------*/
@@ -245,14 +281,14 @@ footer span{
 .conteudoPagina{
 	margin-bottom:30px;
 }
-#projetos h1, #tarefas h1{
+.container h1{
 	font-size:37px;
 	color:#666;
 	font-weight:normal;
 	float: left;
+	margin-top:22px;
 }
-#projetos h1{margin:25px 0 20px;;}
-#tarefas h1 {margin-top:20px;}
+#projetos h1{margin-bottom: 20px;}
 #mensagemInicial{
 	font-size:16px;
 	color:#444;
@@ -305,7 +341,6 @@ footer span{
 /*------------------------*/
 .semGrade{
 	background-color:#e8e8e8;
-	padding-bottom:25px;
 	border-bottom: 1px dashed #7d7d7d;
 }
 .containerFuncionalidades{
@@ -384,4 +419,35 @@ table thead th, table tbody td{
 	width:50px;
 	height:50px;
 	margin-top:10px;
+}
+/*------------------------*/
+/*------- Burndown -------*/
+/*------------------------*/
+#burndown h2{
+	font-size:22px;
+	color:#666;
+	margin: 25px 0 10px;
+}
+#chart_div{
+	width: 980px; 
+	height: 500px;
+	margin-bottom:50px;
+}
+#containerFormBurn{
+	background-color: #E8E8E8;
+	width: 380px;
+	border: 1px dashed #7D7D7D;
+	padding: 20px 50px;
+	margin:20px 0 150px;
+}
+
+#burndown form fieldset{
+	width:380px;
+}
+#burndown input{
+	height: 30px;
+	border: 1px solid #d3d3d3;
+	width: 150px;
+	font-size: 1em;
+	padding-left: 10px;
 }

@@ -51,4 +51,9 @@ class Usuario
     end
   end
   
+  def inclui_projeto id
+    self.permissoes_projetos << id
+    self.save
+  end
+  
 end

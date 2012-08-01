@@ -32,3 +32,27 @@ $(document).ready(function() {
     	$('#notice').slideUp(700);
     });
 });
+
+montaArray = function(array, inicio, razao, duracao){
+		pontos = new Array;
+		pontos[0] = ['Dia', 'Ideal', 'Real'];
+		n = array.length;
+		total = inicio;
+		for(i=0;i<n;i++){
+			if(i==0){
+				pontos[i+1] = [i, total, total];
+			}
+			else{
+				pontos[i+1] = [i, total, array[i]];	
+			}
+			total = total-razao;
+		};
+		
+		atual = pontos.length - 1;
+		for(i=atual;i<=duracao;i++){
+			pontos[i+1] = [i,total,null];
+			total = total-razao;			
+		}
+		
+		return pontos;
+	};

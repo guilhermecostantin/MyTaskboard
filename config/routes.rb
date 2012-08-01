@@ -6,14 +6,15 @@ Mytaskboard::Application.routes.draw do
   end
               
   resources :usuarios do
-    post 'addproject', :on => :member    
+    post 'addproject', :on => :member
+    post 'aceitaProjeto', :on => :member     
   end
  
   resources :projetos do
     post 'adduser', :on => :member
-    get 'burndown', :on => :member
     get 'solicitacoes', :on => :member
     get 'lista', :on => :collection
+    resources :burndowns
     resources :tarefas  do
       post 'muda_status', :on => :member
     end

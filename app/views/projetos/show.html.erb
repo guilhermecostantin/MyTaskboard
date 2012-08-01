@@ -1,7 +1,12 @@
 <div id="tarefas">
 	<div class="semGrade">
-		<div class="container">
+		<div id="topoAbas" class="container">
 			<h1><%= @projeto.nome%></h1>
+			<ul>
+				<li id="selecionado">Tarefas</li>
+				<li><a href="#"><%=link_to "Burndown", projeto_burndowns_path(@projeto)%></a></li>
+				<li><a href="#"><%=link_to "Solicitações", solicitacoes_projeto_path(@projeto)%></a></li>
+			</ul>
 			<br />
 		</div>
 	</div>

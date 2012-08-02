@@ -1,7 +1,7 @@
 class Burndown
-  include MongoMapper::EmbeddedDocument
+  include MongoMapper::Document
 
-
+  key :projeto_id
   key :data_inicio, Time
   key :data_fim, Time
   key :duracao, Integer
@@ -10,7 +10,6 @@ class Burndown
   
   
   timestamps!
-  belongs_to :projetos
   
   
 end

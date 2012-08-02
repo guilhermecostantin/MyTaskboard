@@ -1,7 +1,8 @@
 class TarefasController < ApplicationController
+ before_filter {@projeto = Projeto.find(params[:projeto_id])}
+ before_filter{@solicitacoes = @projeto.solicitacoes_entrada}
  
   def create
-    @projeto = Projeto.find(params[:projeto_id])    
     @array = params[:descricao].split("\r\n")
     @array.each do |t|
       @tarefa = Tarefa.new(:descricao => t, :status => 1)
@@ -19,7 +20,6 @@ class TarefasController < ApplicationController
   end
 
   def destroy
-    @projeto = Projeto.find(params[:projeto_id])
     @projeto.delete_task(params[:id])
     if @projeto.save
       head 200
@@ -29,7 +29,6 @@ class TarefasController < ApplicationController
   end
   
   def muda_status
-    @projeto = Projeto.find(params[:projeto_id])
     @tarefa = @projeto.tarefas.find(params[:id])
     @tarefa.change_status params[:coluna]
    if @projeto.save

@@ -5,14 +5,17 @@
 			<ul>
 				<li><%=link_to "Tarefas", projeto_path(@projeto)%></li>
 				<li id="selecionado">Burndown</li>
-				<li><a href="#"><%=link_to "Solicitações", solicitacoes_projeto_path(@projeto)%></a></li>
+				<%if !@solicitacoes.empty? %>
+				<li><a href="#"><%=link_to "Solicitações("+@solicitacoes.count.to_s+")", solicitacoes_projeto_path(@projeto)%></a></li>
+				<%end%>
 			</ul>
 			<br />
 		</div>
 	</div>
 	<div class="container">
-	<h2>Burndown</h2><br />
+	<h2>Burndown</h2>
 	<% if @burndown.nil? %>
+		<br />
 		<p>
 			Um Burndown é um gráfico que mensura a quantidade de trabalho restante pelo tempo que falta, segue  seguinte lógica: Se uma tarefa está na coluna de 
 			"tarefas", ela tem peso 2, na coluna "em andamento" tem peso 1. No gráfico, o eixo y representa a soma de todas as tarefas (com os devidos pesos) e o eixo x 
@@ -22,7 +25,7 @@
 		<br/>
 		<p>Este projeto ainda não possui nenhum burndown, para criar um entre com as datas de início e fim</p>
 		<div id="containerFormBurn">	
-			<%= form_tag ('/projetos/'+params[:projeto_id]+'/burndown') do%>
+			<%= form_tag ('/projetos/'+params[:projeto_id]+'/burndowns') do%>
 				<fieldset>
 					<%= label_tag :data_inicio, "De" %>
 					<%= text_field_tag :data_inicio,"", :placeholder=>"Data Início" %>
@@ -36,15 +39,14 @@
 			$(function() {
 				$( "#data_inicio" ).datepicker({
 					defaultDate: "+1w",
-				 	dateFormat: "dd-mm-yy",	
+				 	dateFormat: "dd/mm/yy",	
 					onSelect: function( selectedDate ) {
 						$( "#data_fim" ).datepicker( "option", "minDate", selectedDate );
 					}
 				});
 				$( "#data_fim" ).datepicker({
 					defaultDate: "+1w",
-					changeMonth: true,
-					numberOfMonths: 1,
+					dateFormat: "dd/mm/yy",
 					onSelect: function( selectedDate ) {
 						$( "#data_inicio" ).datepicker( "option", "maxDate", selectedDate );
 					}
@@ -52,8 +54,10 @@
 			});
 			</script>
 		</div>
-	<%else%>
 	
+	<%else%>
+	<%= link_to 'Novo projeto', projeto_burndown_path(@projeto,@burndown), confirm: 'Esse burndown será excluído para que você possa criar um novo.', :class=>"deleteBurndown" ,method: :delete %>
+	<br />
 	<div id="chart_div"></div>
 	
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>

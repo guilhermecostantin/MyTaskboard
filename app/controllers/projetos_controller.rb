@@ -22,6 +22,7 @@ class ProjetosController < ApplicationController
   def show
     @users = Usuario.all
     @projeto = Projeto.find(params[:id])
+    @solicitacoes = @projeto.solicitacoes_entrada
     @tarefas = @projeto.tarefas
     @afazer = @tarefas.select{|x| x.status==1}
     @andamento = @tarefas.select{|x| x.status==2}
@@ -70,7 +71,7 @@ class ProjetosController < ApplicationController
   end
  
  def solicitacoes
-   @projeto = Projeto.find(params[:id])
+  @projeto = Projeto.find(params[:id])
   @solicitacoes = @projeto.solicitacoes_entrada
   @usuarios = Array.new
   @solicitacoes.each do |id|

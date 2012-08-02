@@ -1,26 +1,30 @@
-<div class="semGrade">
-	<div id="topoAbas" class="container">
-		<h1><%= @projeto.nome%></h1>
-		<ul>
-			<li><%=link_to "Tarefas", projeto_path(@projeto)%></li>
-			<li><a href="#"><%=link_to "Burndown", projeto_burndowns_path(@projeto)%></a></li>
-			<li id="selecionado">Solicitações</li>
-		</ul>
-		<br />
-	</div>
-</div>
 <div id="solicitacoes">
-	<% if @usuarios.empty?%>
-	<p> Esse projeto não tem nenhuma solicitação pendente.</p>
-	<% else %>
-		<% @usuarios.each do |u|%>
-			<%= form_tag ('/usuarios/'+u.id+'/aceitaProjeto') do%>
-				<fieldset>
-					<%= label_tag :usuario_email, u.email%>
-				    <%= hidden_field_tag :projeto_id, params[:id] %>
-				    <%= submit_tag "Aceitar usuário", :class=>"botao" %>
-				</fieldset>
-			<% end %>	
-		<%end%>
+	<div class="semGrade">
+		<div id="topoAbas" class="container">
+			<h1><%= @projeto.nome%></h1>
+			<ul>
+				<li><%=link_to "Tarefas", projeto_path(@projeto)%></li>
+				<li><a href="#"><%=link_to "Burndown", projeto_burndowns_path(@projeto)%></a></li>
+				<li id="selecionado">Solicitações</li>
+			</ul>
+			<br />
+		</div>
+	</div>
+	<div class="container">
+		<h2>Solicitações</h2><br/>
+		<% if @usuarios.empty?%>
+		<p class="nada"> Esse projeto não tem nenhuma solicitação pendente.</p>
+		<% else %>
+			<p>Os seguintes usuários desejam fazer parte desse projeto:</p><br />
+			<% @usuarios.each do |u|%>
+				<%= form_tag ('/usuarios/'+u.id+'/aceitaProjeto') do%>
+					<fieldset>
+						<%= label_tag :usuario_email, u.email%>
+					    <%= hidden_field_tag :projeto_id, params[:id] %>
+					    <%= submit_tag "Aceitar usuário", :class=>"botao" %>
+					</fieldset>
+				<% end %>	
+			<%end%>
 	<% end %>
+	</div>
 </div>

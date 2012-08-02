@@ -5,7 +5,9 @@
 			<ul>
 				<li id="selecionado">Tarefas</li>
 				<li><a href="#"><%=link_to "Burndown", projeto_burndowns_path(@projeto)%></a></li>
-				<li><a href="#"><%=link_to "Solicitações", solicitacoes_projeto_path(@projeto)%></a></li>
+				<%if !@solicitacoes.empty? %>
+				<li><a href="#"><%=link_to "Solicitações("+@solicitacoes.count.to_s+")", solicitacoes_projeto_path(@projeto)%></a></li>
+				<%end%>
 			</ul>
 			<br />
 		</div>

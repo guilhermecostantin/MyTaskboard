@@ -420,13 +420,14 @@ table thead th, table tbody td{
 	height:50px;
 	margin-top:10px;
 }
-/*------------------------*/
-/*------- Burndown -------*/
-/*------------------------*/
-#burndown h2{
+/*---------------------------------------*/
+/*------- Burndown e solicitacoes -------*/
+/*---------------------------------------*/
+#burndown h2, #solicitacoes h2{
 	font-size:22px;
 	color:#666;
-	margin: 25px 0 10px;
+	margin: 25px 0;
+	float:left;
 }
 #chart_div{
 	width: 980px; 
@@ -450,4 +451,15 @@ table thead th, table tbody td{
 	width: 150px;
 	font-size: 1em;
 	padding-left: 10px;
+}
+.deleteBurndown{
+	float: right;
+	text-decoration: underline;
+	font-weight: bold;
+	font-size: 14px;
+	color: #807D7D;
+	margin-top: 30px;
+}
+.nada{
+	margin-bottom:200px;
 }

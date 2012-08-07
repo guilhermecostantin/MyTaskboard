@@ -15,7 +15,8 @@ class BurndownsController < ApplicationController
   def create
     hash = Hash.new
     hash[:projeto_id] = params[:projeto_id]  
-    hash[:pontuacao_inicial] = @projeto.tarefas.select{|x| x.status == 1}.count*2
+    hash[:pontuacao_inicial] = (@projeto.tarefas.select{|x| x.status == 1}.count*2) + (@projeto.tarefas.select{|x| x.status == 2}.count)
+    
     hash[:data_inicio] = Date.strptime(params[:data_inicio],"%d/%m/%Y")
     hash[:data_fim] = Date.strptime(params[:data_fim],"%d/%m/%Y")
     hash[:duracao] = (hash[:data_fim] - hash[:data_inicio]).to_i + 1

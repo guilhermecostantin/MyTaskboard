@@ -40,17 +40,17 @@ montaArray = function(array, inicio, razao, duracao){
 		total = inicio;
 		for(i=0;i<n;i++){
 			if(i==0){
-				pontos[i+1] = [i, total, total];
+				pontos[i+1] = [i.toString(), total, total];
 			}
 			else{
-				pontos[i+1] = [i, total, array[i]];	
+				pontos[i+1] = [i.toString(), total, array[i]];	
 			}
 			total = total-razao;
 		};
 		
 		atual = pontos.length - 1;
 		for(i=atual;i<=duracao;i++){
-			pontos[i+1] = [i,total,null];
+			pontos[i+1] = [i.toString(),total,null];
 			total = total-razao;			
 		}
 		

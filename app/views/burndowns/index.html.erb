@@ -56,7 +56,7 @@
 		</div>
 	
 	<%else%>
-	<%= link_to 'Novo projeto', projeto_burndown_path(@projeto,@burndown), confirm: 'Esse burndown será excluído para que você possa criar um novo.', :class=>"deleteBurndown" ,method: :delete %>
+	<%= link_to 'Novo burndown', projeto_burndown_path(@projeto,@burndown), confirm: 'Esse burndown será excluído para que você possa criar um novo.', :class=>"deleteBurndown" ,method: :delete %>
 	<br />
 	<div id="chart_div"></div>
 	

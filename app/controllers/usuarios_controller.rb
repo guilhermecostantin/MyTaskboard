@@ -31,7 +31,7 @@ class UsuariosController < ApplicationController
    usuario.inclui_projeto params[:projeto_id]
    projeto.tira_solicitacao usuario.id
    respond_to do |format|
-      format.html { redirect_to projeto_path(projeto), notice: "deu certo brow" }
+      format.html { redirect_to projeto_path(projeto), notice: "Usuario adicionado ao projeto com sucesso!" }
    end
  end
   

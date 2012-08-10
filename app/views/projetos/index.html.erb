@@ -22,7 +22,7 @@
 		<h1>Projetos</h1><br />
 		<% @projetos.each do |projeto| %>
 			<div class="containerFolder">
-			<%= link_to 'x', projeto, confirm: 'Tem certeza? todas as tarefas serão deletadas, não tem volta!', :class=>"deleteFolder" ,method: :delete %>	
+			<%= link_to 'x', projeto, confirm: 'Tem certeza? todas as tarefas desse projeto serão deletadas!', :class=>"deleteFolder" ,method: :delete %>	
 			<%= link_to projeto.nome, projeto, :class=>"folder ownerFolder"%>
 			</div>
 		<% end %>

@@ -28,7 +28,7 @@ br{
 #notice{
 	background-color: #BBB;
 	color: #fff;
-	width: 800px;
+	width: 690px;
 	margin: 0 auto;
 	text-align: center;
 	border-bottom-left-radius: 10px;
@@ -125,6 +125,10 @@ br{
 }
 #botao{
 	border: 1px solid #707070;
+}
+#botaoProjetos{
+	border: 1px solid #707070;
+	margin-right:5px;
 }
 footer{
 	padding: 20px 0;

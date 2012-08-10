@@ -1,21 +1,46 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 	
 	<title>Mytaskboard</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  
+  	<meta name="description" content="O myTaskboard é um quadro de tarefas simples, leve e fácil de usar onde você visualiza de forma gráfica o andamento e a evolução de suas tarefas" />
+	<meta name="keywords" content="quadro de tarefas, tarefas, taskboard, projeto, scrum, burndown, postit, stick, sprint" />
   	<%= stylesheet_link_tag    "application" %>
   	<%= javascript_include_tag "application" %>
   	<%= csrf_meta_tags %>
+  	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-33979897-1']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	
+	</script>
 </head>
 
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <div id="topo">
 	<div id="containerTopo">
 		<% if usuario_signed_in? %>
   		<a href="/projetos"><img src='/assets/logo.png' alt="logo mytaskboard" id="logo" /></a>
-  		  <%= link_to'Logout', destroy_usuario_session_path, :method => :delete, :id => "botao", :class => "botao" %>        
+  		<%= link_to'Logout', destroy_usuario_session_path, :method => :delete, :id => "botao", :class => "botao" %>        
+		<%= link_to'Projetos', projetos_path,:id => "botaoProjetos", :class => "botao" %>
 		<% else %>
 		<a href="/"><img src='/assets/logo.png' alt="logo mytaskboard" id="logo" /></a>
   		<%= link_to "Login", new_session_path(resource_name),:id => "botao", :class => "botao" %><br />
@@ -30,10 +55,9 @@
 
 <footer>
 	<div class="container">
-		<span>Copyright 2012 - contato@mytaskboard.com</span>
+		<span>contato@mytaskboard.com</span>
 		<div id="contIcon">
-			<a href = "#" id="tweetIcon" class="socialIcon"></a>
-			<a href = "#" id="faceIcon" class="socialIcon"></a>
+			<div class="fb-like" data-href="http://www.mytaskboard.com.br" data-send="false" data-layout="button_count" data-width="50" data-show-faces="false"></div>
 		</div><br />
 	</div>
 </footer>

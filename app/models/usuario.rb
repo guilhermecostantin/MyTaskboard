@@ -1,6 +1,7 @@
+# -*- encoding : utf-8 -*-
 class Usuario
   include MongoMapper::Document
-  devise :database_authenticatable, :registerable, :validatable
+  devise :database_authenticatable, :registerable
   
   key :nome, String
   key :email, String
@@ -17,6 +18,9 @@ class Usuario
 
   timestamps!
   
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :message => 'Formato de email inválido'
+  validates_presence_of :password, :message => 'Senha não pode estar em branco'
+  validates_uniqueness_of :email, :message => 'Email já está em uso'
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   

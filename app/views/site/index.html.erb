@@ -23,13 +23,14 @@
 	</div>
 	<div id="colunaDireita">
 		<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  		<%= devise_error_messages! %>
-			
 			<fieldset>
 				<h2> Teste e comprove, é grátis!</h2>
+				<% if flash[:error]%>
+					<p class='errorMessage'><%= flash[:error]%></p>
+				<%end%>
 				<%= f.email_field :email, :class=>"input", :placeholder=>"Email" %>
 				<%= f.password_field :password, :class=>"input", :placeholder=>"Senha" %>
-				<%= f.submit "Register", :id=>"botaoRegistro", :class=>"botao" %>
+				<%= f.submit "Cadastrar", :id=>"botaoRegistro", :class=>"botao" %>
 			</fieldset>
 		
 		<% end %>
@@ -40,13 +41,14 @@
 
 
 <script type="text/javascript">
+
 	function iniciaTimer() {
 		$("#containerDepoimentos").everyTime(6000, function() {
 			trocaDepoimento();
 		});
 	};
 	
-	function trocaDepoimento{
+	function trocaDepoimento(){
 		$("#habilitado").fadeOut();
 		$("#desabilitado").fadeIn();
 	};

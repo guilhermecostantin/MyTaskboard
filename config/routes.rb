@@ -1,15 +1,18 @@
 Mytaskboard::Application.routes.draw do
   root :to => "site#index"  
-  devise_for :usuarios, :path_names =>{:sign_in => 'login'}
+  devise_for :usuarios, :path_names =>{:sign_in => 'login'}, :controllers => { :registrations => "registrations" }
   devise_scope :usuarios do
     get "login", :to => "devise/sessions#new"
   end
-              
   resources :usuarios do
     post 'addproject', :on => :member
     post 'aceitaProjeto', :on => :member     
   end
- 
+ unauthenticated do
+  as :usuarios do
+    root :to => 'site#index'
+  end
+end
   resources :projetos do
     post 'adduser', :on => :member
     get 'solicitacoes', :on => :member

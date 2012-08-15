@@ -48,6 +48,11 @@ br{
 	font-weight:bold;
 	font-size:14px;
 }
+.errorMessage{
+	color:#FF0000;
+	font-size:12px;
+	margin-bottom:5px;
+}
 /*------------------------------*/
 /*------- Topo com abas --------*/
 /*------------------------------*/

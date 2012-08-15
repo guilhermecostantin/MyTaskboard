@@ -17,5 +17,9 @@ class Tarefa
         self.status = 3
     end
   end
+  
+  def descricao_resumida
+     descricao.length > 60 ? descricao.slice(0,57)+'...' : descricao
+  end
 
 end

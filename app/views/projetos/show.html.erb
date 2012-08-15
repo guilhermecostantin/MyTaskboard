@@ -47,7 +47,7 @@
 						<td id="coluna1" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
 							<%@afazer.each do |tarefa|%>
 								<div id="<%=tarefa.id%>" class="postit <%=@estilo_afazer%>" draggable="true" ondragstart="dragIt(this, event)">
-									<p><%=tarefa.descricao%></p> 
+									<p title="<%=tarefa.descricao%>"><%=tarefa.descricao_resumida%></p> 
 								</div>
 							<%end%>
 							
@@ -55,14 +55,14 @@
 						<td id="coluna2" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
 							<%@andamento.each do |tarefa|%>
 								<div id="<%=tarefa.id%>" class="postit <%=@estilo_andamento%>" draggable="true" ondragstart="dragIt(this, event)">
-									<p><%=tarefa.descricao%></p> 
+									<p title="<%=tarefa.descricao%>"><%=tarefa.descricao_resumida%></p> 
 								</div>
 							<%end%>
 						</td>
 						<td id="coluna3" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
 							<%@prontas.each do |tarefa|%>
 								<div id="<%=tarefa.id%>" class="postit <%=@estilo_prontas%>" draggable="true" ondragstart="dragIt(this, event)">
-									<p><%=tarefa.descricao%></p> 
+									<p title="<%=tarefa.descricao%>"><%=tarefa.descricao_resumida%></p> 
 								</div>
 							<%end%>
 						</td>

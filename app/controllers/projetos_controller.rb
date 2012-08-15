@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ProjetosController < ApplicationController
   
   def index
@@ -27,10 +28,31 @@ class ProjetosController < ApplicationController
     @afazer = @tarefas.select{|x| x.status==1}
     @andamento = @tarefas.select{|x| x.status==2}
     @prontas = @tarefas.select{|x| x.status==3}
+    default = @projeto.estilo_postit_default
+    if !default.nil? and default == false
+      @estilo_afazer = @projeto.estilo_afazer
+      @estilo_andamento = @projeto.estilo_andamento
+      @estilo_prontas = @projeto.estilo_prontas
+    else
+      @estilo_afazer = @estilo_andamento = @estilo_prontas = "postit_default"
+    end
     respond_to do |format|
       format.html 
       format.json { render json: @users}
     end
+  end
+  
+  def update
+     @projeto = Projeto.find(params[:id])
+     respond_to do |format|
+        if @projeto.update_attributes(params[:projeto])
+          format.html { redirect_to @projeto, notice: 'O projeto foi atualizado com sucesso.' }
+          format.json { render json: @projeto, status: :created, location: @projeto }
+        else
+          flash[:error] = "Ocorreu um erro e o projeto nao pode ser salvo, tente novamente mais tarde"
+          redirect_to projetos_path
+        end
+      end
   end
 
   def destroy
@@ -57,12 +79,11 @@ class ProjetosController < ApplicationController
     end
   end
   
-  
   def adduser
     ids = params[:users_id].split(",")
     ids.each do |id|
       u = Usuario.find(id)
-      u.permissoes_projetos << params[:id]
+      u.permissoes_projetos << params[:id] unless u.permissoes_projetos.include?(params[:id])
       u.save
     end
     respond_to do |format|
@@ -80,7 +101,7 @@ class ProjetosController < ApplicationController
  end
  
  def lista
-   @projetos = Projeto.where(:usuario_id.ne => @usuario.id, :nome=> /#{params[:q]}/).fields(:id, :nome)
+   @projetos = Projeto.where(:publico => true, :usuario_id.ne => @usuario.id, :nome=> /#{params[:q]}/i).fields(:id, :nome)
     respond_to do |format|
       format.json{ render :json => @projetos }
     end

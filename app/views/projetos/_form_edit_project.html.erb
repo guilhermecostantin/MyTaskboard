@@ -1,0 +1,69 @@
+<p class="avisoEdicao"> Para editar qualquer dado do seu projeto, basta alterá-lo e clicar no botão atualizar abaixo</p>
+<%= form_for(@projeto) do |f| %>
+	<fieldset class="fieldEdicao">
+		<p class="tituloField">Nome do projeto</p>
+		<%= f.text_field :nome, :class=>"inputProject"%>
+		<%= f.hidden_field :usuario_id, :value => @usuario.id%>
+	</fieldset>
+	<fieldset class="fieldEdicao">
+		<p class="tituloField">Qual a privacidade desse projeto?</p>
+		<%= f.radio_button 'publico', true%>
+		<%= f.label :publico_true, 'Público (Outros usuários podem buscar e solicitar entrada nesse projeto)'%>
+		<br />
+		<%= f.radio_button 'publico', false%>
+		<%= f.label :publico_false, 'Privado (Apenas você pode adicionar usuários nesse projeto)'%>
+	</fieldset>
+	
+	<fieldset class="fieldEdicao">
+		<p class="tituloField">Estilo dos postit's default? (postit amarelo)</p>
+		<div class="optionsPostit">
+			<%= f.radio_button 'estilo_postit_default', true%>
+			<%= f.label :estilo_postit_default_true, 'Sim'%>
+		</div>
+		<div class="optionsPostit">
+			<%= f.radio_button 'estilo_postit_default', false%>
+			<%= f.label :estilo_postit_default_false, 'Não'%>
+		</div>
+	</fieldset>
+	
+	<fieldset id="contColunas" class="fieldEdicao">
+		<p class="tituloField">Escolha a cor dos postit's de cada coluna.</p>
+		<div class="colunasEdicao colunasEdicaoBorder">
+			<p class="tituloColunas">Tarefas</p>
+			<%= f.radio_button 'estilo_afazer', 'postit_default'%>
+			<%= f.label :estilo_afazer_postit_default, 'Amarelo'%><br />
+			<%= f.radio_button 'estilo_afazer', 'postit_verde'%>
+			<%= f.label :estilo_afazer_postit_verde, 'Verde'%><br />
+			<%= f.radio_button 'estilo_afazer', 'postit_rosa'%>
+			<%= f.label :estilo_afazer_postit_rosa, 'Rosa'%><br />
+			<%= f.radio_button 'estilo_afazer', 'postit_azul'%>
+			<%= f.label :estilo_afazer_postit_azul, 'Azul'%><br />
+		</div>
+		<div class="colunasEdicao colunasEdicaoBorder">
+			<p class="tituloColunas">Em andamento</p>
+			<%= f.radio_button 'estilo_andamento', 'postit_default'%>
+			<%= f.label :estilo_andamento_postit_default, 'Amarelo'%><br />
+			<%= f.radio_button 'estilo_andamento', 'postit_verde'%>
+			<%= f.label :estilo_andamento_postit_verde, 'Verde'%><br />
+			<%= f.radio_button 'estilo_andamento', 'postit_rosa'%>
+			<%= f.label :estilo_andamento_postit_rosa, 'Rosa'%><br />
+			<%= f.radio_button 'estilo_andamento', 'postit_azul'%>
+			<%= f.label :estilo_andamento_postit_azul, 'Azul'%><br />
+		</div>	
+		<div class="colunasEdicao">
+			<p class="tituloColunas">Prontas</p>
+			<%= f.radio_button 'estilo_prontas', 'postit_default'%>
+			<%= f.label :estilo_prontas_postit_default, 'Amarelo'%><br />
+			<%= f.radio_button 'estilo_prontas', 'postit_verde'%>
+			<%= f.label :estilo_prontas_postit_verde, 'Verde'%><br />
+			<%= f.radio_button 'estilo_prontas', 'postit_rosa'%>
+			<%= f.label :estilo_prontas_postit_rosa, 'Rosa'%><br />
+			<%= f.radio_button 'estilo_prontas', 'postit_azul'%>
+			<%= f.label :estilo_prontas_postit_azul, 'Azul'%><br />
+		</div>
+	</fieldset>
+	
+	<a href="javascript:;" id="fecharLightbox" class="botao">Cancelar</a>
+	<%= f.submit "Atualizar", :id=>"botaoRegistro", :class=>"botao" %>
+	
+<% end %>    

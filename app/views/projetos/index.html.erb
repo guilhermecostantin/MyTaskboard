@@ -30,7 +30,7 @@
 		<% @permitidos.each do |projeto| %>
 		<div class="containerFolder">
 			<%= link_to 'x', projeto, confirm: 'Tem certeza? O projeto não será deletado, apenas removido de sua lista.', :class=>"deleteFolder" ,method: :delete %>
-		<%= link_to projeto.nome, projeto, :class=>"folder folderBlue"%>
+			<%= link_to projeto.nome, projeto, :class=>"folder folderBlue"%>
 		</div>
 		<%end%><br />
 	</div>

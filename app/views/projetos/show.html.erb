@@ -46,7 +46,7 @@
 					<tr>
 						<td id="coluna1" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
 							<%@afazer.each do |tarefa|%>
-								<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
+								<div id="<%=tarefa.id%>" class="postit <%=@estilo_afazer%>" draggable="true" ondragstart="dragIt(this, event)">
 									<p><%=tarefa.descricao%></p> 
 								</div>
 							<%end%>
@@ -54,14 +54,14 @@
 						</td>
 						<td id="coluna2" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
 							<%@andamento.each do |tarefa|%>
-								<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
+								<div id="<%=tarefa.id%>" class="postit <%=@estilo_andamento%>" draggable="true" ondragstart="dragIt(this, event)">
 									<p><%=tarefa.descricao%></p> 
 								</div>
 							<%end%>
 						</td>
 						<td id="coluna3" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
 							<%@prontas.each do |tarefa|%>
-								<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
+								<div id="<%=tarefa.id%>" class="postit <%=@estilo_prontas%>" draggable="true" ondragstart="dragIt(this, event)">
 									<p><%=tarefa.descricao%></p> 
 								</div>
 							<%end%>
@@ -75,22 +75,37 @@
 	<div class="containerFuncionalidades">
 		<div id="boxAddTarefa">
 			<%= render 'form_add_tarefas' %>	
-		</div>		
+		</div>	
+		<div id="boxEditProjeto">
+			<h3>Configurações do projeto</h3>
+			<p>Clique no botão abaixo para alterar o nome do projeto, sua privacidade ou a cor dos postit's. </p>
+			<a href="javascript:;" id="botaoEditar" class="botao">Editar projeto</a>
+		</div>	
 		<div id="boxAddUser">
 			<%= render 'form_add_users' %>	
 		</div>
 		<br />
 	</div>	
 	<%end%>
+	
+	<div id="containerEdicao" title="Configurações do projeto">
+		<%= render 'form_edit_project' %>	
+	</div>
+	
+	
 </div>
 <script type="text/javascript">
-	function dragIt(target, e) {
-    e.dataTransfer.setData('postit', target.id);
+
+editar();
+
+function dragIt(target, e) {
+e.dataTransfer.setData('postit', target.id);
 }
 function dropIt(target, e) {
     var id = e.dataTransfer.getData('postit');
     target.appendChild(document.getElementById(id)); 
 	pai = $('#'+id).parent().attr('id')
+	mudaCor(pai, id,"<%=@estilo_afazer%>", "<%=@estilo_andamento%>", "<%=@estilo_prontas%>");
     $.post("/projetos/<%=@projeto.id%>/tarefas/"+id+"/muda_status", {coluna : pai});
     e.preventDefault();
 }

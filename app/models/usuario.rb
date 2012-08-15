@@ -19,7 +19,7 @@ class Usuario
   timestamps!
   
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :message => 'Formato de email inválido'
-  validates_presence_of :password, :message => 'Senha não pode estar em branco'
+  validates_presence_of :encrypted_password, :message => 'Senha não pode estar em branco'
   validates_uniqueness_of :email, :message => 'Email já está em uso'
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
@@ -56,8 +56,7 @@ class Usuario
   end
   
   def inclui_projeto id
-    self.permissoes_projetos << id
-    self.save
+    self.permissoes_projetos << id unless self.permissoes_projetos.include?(id)
   end
   
 end

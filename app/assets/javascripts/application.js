@@ -6,6 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require edicao
 //= require_tree .
 
 $(document).ready(function() {
@@ -16,7 +17,8 @@ $(document).ready(function() {
     	theme:"facebook",
 	 	hintText: "digite o email que deseja buscar",
         noResultsText: "Nenhum usuário encontrado",
-        searchingText: "Procurando..."
+        searchingText: "Procurando...",
+     	minChars: 4	
     });
 
     $("#projetos_id").tokenInput('/projetos/lista.json',{
@@ -25,12 +27,30 @@ $(document).ready(function() {
     	theme:"facebook",
 	 	hintText: "digite o nome do projeto que deseja buscar",
         noResultsText: "Nenhum projeto encontrado",
-        searchingText: "Procurando..."
+        searchingText: "Procurando...",
+        minChars: 4
     });
     
     $('#close').click(function(){
     	$('#notice').slideUp(700);
     });
+    
+    $("#botaoEditar").click(function() {
+		$("#containerEdicao").dialog("open");
+	});
+     $("#fecharLightbox").click(function() {
+		$("#containerEdicao").dialog("close");
+	});
+   $("#containerEdicao").dialog({
+				autoOpen : false,
+				width : 850,
+				modal : true,
+				show : 'fade',
+				hide : 'fade',
+				resizable: false
+			}); 
+    
+    
 });
 
 montaArray = function(array, inicio, razao, duracao){
@@ -56,3 +76,20 @@ montaArray = function(array, inicio, razao, duracao){
 		
 		return pontos;
 	};
+
+mudaCor = function(pai, id, afazer, andamento, prontas){
+		$('#'+id).removeClass(afazer);
+		$('#'+id).removeClass(andamento);
+		$('#'+id).removeClass(prontas);
+		switch (pai){
+			case ("coluna1"):
+				$('#'+id).addClass(afazer);
+				break;
+			case ("coluna2"):
+				$('#'+id).addClass(andamento);
+				break;
+			case ("coluna3"):
+				$('#'+id).addClass(prontas);
+				break;
+		}
+}

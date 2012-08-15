@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class UsuariosController < ApplicationController
   # GET /projetos
   # GET /projetos.json
@@ -30,8 +31,14 @@ class UsuariosController < ApplicationController
    projeto = Projeto.find(params[:projeto_id])
    usuario.inclui_projeto params[:projeto_id]
    projeto.tira_solicitacao usuario.id
+   
    respond_to do |format|
+   if usuario.save
       format.html { redirect_to projeto_path(projeto), notice: "Usuario adicionado ao projeto com sucesso!" }
+    else 
+      format.html { redirect_to projeto_path(projeto), notice: "Ocorre um erro usuário não pode ser adicionado ao projeto." }
+      format.json { render json: usuario.errors, status: :unprocessable_entity }
+    end
    end
  end
   

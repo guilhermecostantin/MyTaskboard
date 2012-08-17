@@ -408,7 +408,7 @@ $.TokenList = function (input, url_or_data, settings) {
     // The list to store the dropdown items in
     var dropdown = $("<div>")
         .addClass($(input).data("settings").classes.dropdown)
-        .appendTo("body")
+        .appendTo(".dropToken")
         .hide();
 
     // Magic element to help us resize the text input
@@ -752,7 +752,8 @@ $.TokenList = function (input, url_or_data, settings) {
         dropdown
             .css({
                 position: "absolute",
-                top: $(token_list).offset().top + $(token_list).outerHeight(),
+                //top: $(token_list).offset().top + $(token_list).outerHeight(),
+                
                 left: $(token_list).offset().left,
                 width: $(token_list).outerWidth(),
                 'z-index': $(input).data("settings").zindex

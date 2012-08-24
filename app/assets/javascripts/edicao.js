@@ -23,8 +23,6 @@ editar = function(){
 					hide : 'fade',
 					resizable: false
 				}); 
-	    
-	    
 	});
 }
 

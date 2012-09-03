@@ -11,19 +11,28 @@
 		</div>
 	</div>
 	<div class="container">
+		<%if notice%>
+		<div id="notice">
+			<p><%= notice %></p>
+			<a href="javascript:;" id="close">x</a>
+		</div>
+		<%end%>
 		<h2>Solicitações</h2><br/>
 		<% if @usuarios.empty?%>
 		<p class="nada"> Esse projeto não tem nenhuma solicitação pendente.</p>
 		<% else %>
 			<p>Os seguintes usuários desejam fazer parte desse projeto:</p><br />
 			<% @usuarios.each do |u|%>
-				<%= form_tag ('/usuarios/'+u.id+'/aceitaProjeto') do%>
-					<fieldset>
-						<%= label_tag :usuario_email, u.email%>
-					    <%= hidden_field_tag :projeto_id, params[:id] %>
-					    <%= submit_tag "Aceitar usuário", :class=>"botao" %>
-					</fieldset>
-				<% end %>	
+				<div class="contSolicitacao">
+					<%= form_tag ('/usuarios/'+u.id+'/aceitaProjeto') do%>
+						<fieldset>
+							<%= label_tag :usuario_email, u.email%>
+						    <%= hidden_field_tag :projeto_id, params[:id] %>
+						    <%= submit_tag "Recusar usuário", :class=>"botao botaoSolicitacao" %>
+						    <%= submit_tag "Aceitar usuário", :class=>"botao botaoSolicitacao", :id=>"botaoAceitarUsuario" %>
+						</fieldset>
+					<% end %>	
+				</div>	
 			<%end%>
 	<% end %>
 	</div>

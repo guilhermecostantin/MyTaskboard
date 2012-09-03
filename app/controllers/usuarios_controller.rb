@@ -29,15 +29,16 @@ class UsuariosController < ApplicationController
  def aceitaProjeto
    usuario = Usuario.find(params[:id])
    projeto = Projeto.find(params[:projeto_id])
-   usuario.inclui_projeto params[:projeto_id]
+   if(params[:commit] == "Aceitar usuário")
+     usuario.inclui_projeto params[:projeto_id]
+   end
    projeto.tira_solicitacao usuario.id
    
    respond_to do |format|
-   if usuario.save
-      format.html { redirect_to projeto_path(projeto), notice: "Usuario adicionado ao projeto com sucesso!" }
+   if projeto.solicitacoes_entrada.any?
+      format.html { redirect_to solicitacoes_projeto_path(projeto), notice: "Configurações salvas ao projeto com sucesso!" }
     else 
-      format.html { redirect_to projeto_path(projeto), notice: "Ocorre um erro usuário não pode ser adicionado ao projeto." }
-      format.json { render json: usuario.errors, status: :unprocessable_entity }
+      format.html { redirect_to projeto_path(projeto), notice: "Configurações salvas ao projeto com sucesso! Nenhuma solicitação ficou pendente." }
     end
    end
  end

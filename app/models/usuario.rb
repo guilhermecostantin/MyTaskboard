@@ -56,7 +56,10 @@ class Usuario
   end
   
   def inclui_projeto id
-    self.permissoes_projetos << id unless self.permissoes_projetos.include?(id)
+    if !self.permissoes_projetos.include?(id)
+      self.permissoes_projetos << id 
+      self.save
+    end
   end
   
 end

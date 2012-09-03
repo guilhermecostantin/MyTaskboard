@@ -406,7 +406,7 @@ table thead th, table tbody td{
 .postit_azul{background-image: url("/assets/postit_azul.png");}
 .postit p{
 	text-align: center;
-	font-size:14px;
+	font-size:13px;
 	color:#333;
 }
 .boxTarefas{
@@ -474,6 +474,19 @@ table thead th, table tbody td{
 }
 .nada{
 	margin-bottom:200px;
+}
+.contSolicitacao{
+	border: 1px solid #CCC;
+	line-height: 50px;
+	background-color: #E8E8E8;
+	margin-top: 2px;
+	padding: 0 10px;
+}
+.botaoSolicitacao{
+	margin-top:10px !important;
+}
+#botaoAceitarUsuario{
+	margin-right:10px;
 }
 /*---------------------------------*/
 /*------- Edição de projeto -------*/

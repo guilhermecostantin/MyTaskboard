@@ -17,6 +17,7 @@ end
     post 'adduser', :on => :member
     get 'solicitacoes', :on => :member
     get 'lista', :on => :collection
+    post 'destroy_tarefas', :on => :member
     resources :burndowns
     resources :tarefas  do
       post 'muda_status', :on => :member

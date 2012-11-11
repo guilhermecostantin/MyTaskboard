@@ -106,5 +106,27 @@ class ProjetosController < ApplicationController
       format.json{ render :json => @projetos }
     end
  end
-  
+
+ def destroy_tarefas
+    @projeto = Projeto.find(params[:id])
+    #@projeto.delete_varias_task(params[:coluna])
+   # @projeto.tarefas.delete_if{|x| x.status == params[:coluna]}
+   t = @projeto.tarefas.select{|x| x.status == params[:coluna]}
+   t.each do |tarefa|
+    tarefa.destroy
+   end
+    
+    if @projeto.save
+      respond_to do |format|
+        format.html { redirect_to projetos_url, notice: "Tarefas deletadas com sucesso" }
+        format.json { head :ok , notice: "Tarefas deletadas com sucesso"}
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to projetos_url, notice: "Ocorreu um erro ao salvar, tente novamente mais tarde." }
+        format.json { render json: @projeto.errors, status: :unprocessable_entity, notice: "Tarefas deletadas com sucessoooo" }
+      end
+    end
+  end
+
 end

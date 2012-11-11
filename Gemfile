@@ -4,6 +4,7 @@ gem "mongo", "1.5.2"
 gem 'mm-devise'
 gem 'rails', '3.1.3'
 gem 'mongo_mapper'
+gem 'newrelic_rpm'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 

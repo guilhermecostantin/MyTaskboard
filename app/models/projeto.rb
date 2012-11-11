@@ -29,6 +29,10 @@ class Projeto
     t = self.tarefas.find(id)
     self.tarefas.delete(t)
   end
+
+  def delete_varias_task status
+    self.tarefas.delete_if{|x| x.status == status}
+  end
   
   def tira_solicitacao id
     self.solicitacoes_entrada.delete(id)

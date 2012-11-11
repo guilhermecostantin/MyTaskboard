@@ -37,9 +37,9 @@
 			<table>
 				<thead>
 					<tr>
-						<td><h2>Tarefas</h2></td>
-						<td><h2>em andamento</h2></td>
-						<td><h2>prontas</h2></td>
+						<td id="head1"><h2>Tarefas</h2><a href="javascript:;" class="deleteTarefas">x</a></td>
+						<td id="head2"><h2>em andamento</h2><a href="javascript:;" class="deleteTarefas">x</a></td>
+						<td id="head3"><h2>prontas</h2><a href="javascript:;" class="deleteTarefas">x</a></td>
 					</tr>	
 				</thead>
 				<tbody>
@@ -95,7 +95,9 @@
 	
 </div>
 <script type="text/javascript">
-
+$(document).ready(function() {
+	deletarTarefas("<%=@projeto.id%>");
+});
 editar();
 
 function dragIt(target, e) {

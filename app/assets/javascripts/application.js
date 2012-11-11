@@ -50,8 +50,27 @@ $(document).ready(function() {
 				resizable: false
 			}); 
     
-    
 });
+
+deletarTarefas = function(projeto_id){
+   $(".deleteTarefas").click(function(){
+   		if(confirm("tem certeza? todas as tarefas dessa coluna serão excluídas")){
+   				pai = $(this).parent().attr('id');
+   				switch(pai){
+   					case("head1"):
+   						coluna = 1;
+   						break;
+   					case("head2"):
+   						coluna = 2;
+   						break;
+   					case("head3"):
+   						coluna = 3;
+   						break;
+   				}
+   				$.post("/projetos/"+projeto_id+"/destroy_tarefas", {coluna : coluna});
+   		}
+   });
+}
 
 montaArray = function(array, inicio, razao, duracao){
 		pontos = new Array;

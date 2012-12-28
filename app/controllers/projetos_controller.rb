@@ -108,25 +108,37 @@ class ProjetosController < ApplicationController
  end
 
  def destroy_tarefas
-    @projeto = Projeto.find(params[:id])
-    #@projeto.delete_varias_task(params[:coluna])
-   # @projeto.tarefas.delete_if{|x| x.status == params[:coluna]}
-   t = @projeto.tarefas.select{|x| x.status == params[:coluna]}
-   t.each do |tarefa|
-    tarefa.destroy
-   end
-    
-    if @projeto.save
-      respond_to do |format|
-        format.html { redirect_to projetos_url, notice: "Tarefas deletadas com sucesso" }
-        format.json { head :ok , notice: "Tarefas deletadas com sucesso"}
+  
+  begin
+      @projeto = Projeto.find(params[:id])
+      @projeto.tarefas.delete_if{|x| x.status == params[:coluna].to_i}
+      if @projeto.save
+        respond_to do |format|
+      format.json {render json: "Tarefas deletadas com sucesso", status: :ok  }
+        end
+      else
+        respond_to do |format|
+          format.json {render json: "Erro ao deletar tarefas, projeto não pode ser salvo", status: 424 }
+        end
       end
-    else
-      respond_to do |format|
-        format.html { redirect_to projetos_url, notice: "Ocorreu um erro ao salvar, tente novamente mais tarde." }
-        format.json { render json: @projeto.errors, status: :unprocessable_entity, notice: "Tarefas deletadas com sucessoooo" }
-      end
+  rescue Exception=>e
+    respond_to do |format|
+      format.json {render json: "Erro ao deletar tarefas, tente novamente mais tarde", status: 424 }
     end
   end
+ end
+
+ def tarefas_colunas
+  @projeto = Projeto.find(params[:id])
+  @dados = Hash.new
+  
+  @dados[:coluna1] =  @projeto.tarefas.select{|x| x.status == 1}.to_json(:only => [:id, :status, :descricao])
+  @dados[:coluna2] =  @projeto.tarefas.select{|x| x.status == 2}.to_json(:only => [:id, :status, :descricao])
+  @dados[:coluna3] =  @projeto.tarefas.select{|x| x.status == 3}.to_json(:only => [:id, :status, :descricao])
+  
+  respond_to do |format|
+    format.json {render json: @dados}
+  end
+ end
 
 end

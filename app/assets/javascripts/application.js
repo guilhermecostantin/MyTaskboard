@@ -67,9 +67,73 @@ deletarTarefas = function(projeto_id){
    						coluna = 3;
    						break;
    				}
-   				$.post("/projetos/"+projeto_id+"/destroy_tarefas", {coluna : coluna});
+				var url = "/projetos/"+projeto_id+"/destroy_tarefas";
+				var data =  				
+				$.ajax({
+					type: 'POST',
+					url: url,
+					data: { coluna : coluna},
+					//async: false para que o script espere o post ser concluído antes de mudar de página
+					//(pois, do contrário, pode sair da página antes da requisição estar completa e não salvar)
+					success: function(data){
+						alert(data.responseText);
+						reloadTable(projeto_id);
+					},
+					error: function(data, text){
+						alert(data.responseText);
+						reloadTable(projeto_id);
+					}
+				});
+
+
    		}
    });
+}
+
+reloadTable = function(projeto_id){
+	$.ajax({
+		type: 'GET',
+		url: "/projetos/"+projeto_id+"/tarefas_colunas",
+		//async: false para que o script espere o post ser concluído antes de mudar de página
+		//(pois, do contrário, pode sair da página antes da requisição estar completa e não salvar)
+		success: function(data){
+			montaTabela(data)
+		},
+		error: function(){
+			alert('erro');
+		}
+	});
+
+}
+
+montaTabela = function(dados){
+	$('.colunas').empty();
+	var coluna1 = JSON.parse(dados.coluna1);
+	var coluna2 = JSON.parse(dados.coluna2);
+	var coluna3 = JSON.parse(dados.coluna3);
+
+	$.each([coluna1, coluna2, coluna3], function(i,pai){
+		$.each(pai, function(i,item){
+			switch(item.status){
+				case(1):
+					div = "coluna1"
+					break;
+				case(2):
+					div = "coluna2"
+					break;
+				case(3):
+					div = "coluna3"
+					break;
+			} 
+			$('#'+div).append(
+				'<div id='+item.id+' class="postit" draggable="true" ondragstart="dragIt(this, event)">'+
+					'<p title='+item.descricao+'>'+item.descricao+'</p>'+
+				'</div>'
+			);
+
+		});
+	});
+
 }
 
 montaArray = function(array, inicio, razao, duracao){

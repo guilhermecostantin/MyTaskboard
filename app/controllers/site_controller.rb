@@ -5,6 +5,10 @@ class SiteController < ActionController::Base
   def index
 
   end
+
+  def home
+
+  end
  
 
   

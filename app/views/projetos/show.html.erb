@@ -37,31 +37,32 @@
 			<table>
 				<thead>
 					<tr>
-						<td id="head1"><h2>Tarefas</h2><a href="javascript:;" class="deleteTarefas">x</a></td>
-						<td id="head2"><h2>em andamento</h2><a href="javascript:;" class="deleteTarefas">x</a></td>
-						<td id="head3"><h2>prontas</h2><a href="javascript:;" class="deleteTarefas">x</a></td>
+						<td id="head1"><h2>Tarefas</h2></td>
+						<td id="head2"><h2>em andamento</h2></td>
+						<td id="head3"><h2>prontas</h2></td>
 					</tr>	
 				</thead>
 				<tbody>
 					<tr>
-						<td id="coluna1" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
+						<td id="coluna1" class="colunas <%=@estilo_afazer%>" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
+							
 							<%@afazer.each do |tarefa|%>
-								<div id="<%=tarefa.id%>" class="postit <%=@estilo_afazer%>" draggable="true" ondragstart="dragIt(this, event)">
+								<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
 									<p title="<%=tarefa.descricao%>"><%=tarefa.descricao_resumida%></p> 
 								</div>
 							<%end%>
 							
 						</td>
-						<td id="coluna2" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
+						<td id="coluna2" class="colunas <%=@estilo_andamento%>" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
 							<%@andamento.each do |tarefa|%>
-								<div id="<%=tarefa.id%>" class="postit <%=@estilo_andamento%>" draggable="true" ondragstart="dragIt(this, event)">
+								<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
 									<p title="<%=tarefa.descricao%>"><%=tarefa.descricao_resumida%></p> 
 								</div>
 							<%end%>
 						</td>
-						<td id="coluna3" class="colunas" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
+						<td id="coluna3" class="colunas <%=@estilo_prontas%>" ondrop="dropIt(this, event)" ondragenter="return false" ondragover="return false">
 							<%@prontas.each do |tarefa|%>
-								<div id="<%=tarefa.id%>" class="postit <%=@estilo_prontas%>" draggable="true" ondragstart="dragIt(this, event)">
+								<div id="<%=tarefa.id%>" class="postit" draggable="true" ondragstart="dragIt(this, event)">
 									<p title="<%=tarefa.descricao%>"><%=tarefa.descricao_resumida%></p> 
 								</div>
 							<%end%>
@@ -92,12 +93,9 @@
 		<%= render 'form_edit_project' %>	
 	</div>
 	
-	
 </div>
 <script type="text/javascript">
-$(document).ready(function() {
-	deletarTarefas("<%=@projeto.id%>");
-});
+
 editar();
 
 function dragIt(target, e) {

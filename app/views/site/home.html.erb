@@ -1,0 +1,59 @@
+<div id="banner">
+	<div id="containerBanner">
+		<div id="bannerEsquerda">
+			<h1 id="primeiroTitulo">simples, fácil</h1>
+			<h1 id="segundoTitulo">e rápido</h1>
+			<ul>
+				<li class="ordenacao">1º</li><li>Crie um novo projeto</li><br/>
+				<li class="ordenacao">2º</li><li>Liste e organize suas tarefas</li><br/>
+				<li class="ordenacao">3º</li><li>Convide pessoas e colabore em vários projetos</li><br/>
+			</ul>	
+		</div>
+		<div id="bannerDireita">
+			<img src='/assets/imagem_banner.png' id="imagemBanner" />
+		</div>
+		<br />	
+	</div>
+</div>
+<div id="registro">
+	<div id="colunaEsquerda">
+		<img src='/assets/quote_left.gif' id="quoteLeft" /><br />
+		<p id="habilitado">Um quadro de tarefas simples e útil onde você preocupa apenas em realizar suas tarefas.</p>
+		<img src='/assets/quote_right.gif' id="quoteRight" /><br/>
+	</div>
+	<div id="colunaDireita">
+		<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+			<fieldset>
+				<h2> Teste e comprove, é grátis!</h2>
+				<% if flash[:error]%>
+					<p class='errorMessage'><%= flash[:error]%></p>
+				<%end%>
+				<%= f.email_field :email, :class=>"input", :placeholder=>"Email" %>
+				<%= f.password_field :password, :class=>"input", :placeholder=>"Senha" %>
+				<%= f.submit "Cadastrar", :id=>"botaoRegistro", :class=>"botao" %>
+			</fieldset>
+		
+		<% end %>
+		
+	</div>
+	<br/>
+</div>
+
+
+<script type="text/javascript">
+
+	function iniciaTimer() {
+		$("#containerDepoimentos").everyTime(6000, function() {
+			trocaDepoimento();
+		});
+	};
+	
+	function trocaDepoimento(){
+		$("#habilitado").fadeOut();
+		$("#desabilitado").fadeIn();
+	};
+	
+	$(document).ready(function(){
+		iniciaTimer();
+	});
+</script>

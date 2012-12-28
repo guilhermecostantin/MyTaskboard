@@ -400,10 +400,10 @@ table thead th, table tbody td{
 	list-style:none;
 	cursor:move;
 }
-.postit_default{background-image: url("/assets/postit.png");}
-.postit_rosa{background-image: url("/assets/postit_rosa.png");}
-.postit_verde{background-image: url("/assets/postit_verde.png");}
-.postit_azul{background-image: url("/assets/postit_azul.png");}
+.postit_default.p, .postit_default .postit{background-image: url("/assets/postit.png");}
+.postit_rosa.p,.postit_rosa .postit{background-image: url("/assets/postit_rosa.png");}
+.postit_verde.p, .postit_verde .postit{background-image: url("/assets/postit_verde.png");}
+.postit_azul.p, .postit_azul .postit{background-image: url("/assets/postit_azul.png");}
 .postit p{
 	text-align: center;
 	font-size:13px;

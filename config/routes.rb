@@ -18,12 +18,14 @@ end
     get 'solicitacoes', :on => :member
     get 'lista', :on => :collection
     post 'destroy_tarefas', :on => :member
+    get 'tarefas_colunas', :on => :member
     resources :burndowns
     resources :tarefas  do
       post 'muda_status', :on => :member
     end
   end
 
+  match "home" => "site#home" 
  
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -24,8 +24,6 @@ end
       post 'muda_status', :on => :member
     end
   end
-
-  match "home" => "site#home" 
  
   # The priority is based upon order of creation:
   # first created -> highest priority.
